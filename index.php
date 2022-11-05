@@ -31,13 +31,13 @@
 
     $auth = false;
     if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/signin")) {
-      echo'<div>**********From signin***********</div>';
+      // echo'<div>**********From signin***********</div>';
     }
     else{
-      echo'<div>********Not from signin*******</div>';
+      // echo'<div>********Not from signin*******</div>';
     }
     if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/signin/register.php")) {
-      echo'<div>**********From register***********</div>';
+      // echo'<div>**********From register***********</div>';
       session_start();
       include('./db.php');
       // $passHash=password_hash(test_input($_POST["password"]), PASSWORD_DEFAULT);
@@ -68,19 +68,19 @@
       }
     }
     else{
-      echo'<div>********Not from register*******</div>';
+      // echo'<div>********Not from register*******</div>';
     }
   ?>
 
   <?php
     if (session_status() != PHP_SESSION_ACTIVE)session_start();
     if(isset($_SESSION['userId'])){
-      echo('User SignedIn<br>');
+      // echo('User SignedIn<br>');
       // echo('UserId '.$_SESSION['userId'].'<br>');
       $auth = true;
     }
     else{
-      echo('User NOT SignedIn');
+      // echo('User NOT SignedIn');
     }
 
   ?>
@@ -127,7 +127,7 @@
                       <div class="profileContent">
                           <div class="profileMenuContent">Edit Profile</div>
                           <div class="profileMenuContent">Bookings</div>
-                          <div class="profileMenuContent">Bus&nbsp;Pass</div>
+                          <div class="profileMenuContent"><a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a></div>
                           <div class="profileMenuContent">Help</div>
                           <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
                       </div>

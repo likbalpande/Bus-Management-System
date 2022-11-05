@@ -14,6 +14,13 @@
     $conn->query($sql0);
     $conn = new mysqli($servername, $username, $password,$dbname);
     
+    //Create Buss Pass Table
+    $sql00="CREATE TABLE IF NOT EXISTS bus_pass(
+        busPassId VARCHAR(25) NOT NULL UNIQUE,
+        validTill DATETIME
+    );";
+    $conn->query($sql00);
+
     // Create users table
     $sql1 = "CREATE TABLE IF NOT EXISTS users(
         userId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -22,8 +29,6 @@
         email VARCHAR(25),
         firstName VARCHAR(25) NOT NULL,
         lastName VARCHAR(25),
-        busPass BIT(1) DEFAULT(0),
-        busPassId VARCHAR(25),
         userToken VARCHAR(255)
     );";
     $conn->query($sql1);
@@ -227,6 +232,7 @@
         // }
 
 
+    
     
     
 
