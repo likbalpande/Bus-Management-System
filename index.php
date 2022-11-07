@@ -231,24 +231,25 @@
         <div class="footer__link--wrapper">
           <div class="footer__link--items">
             <h2>About Us</h2>
-            <a href="/">How it works</a> 
-            <a href="/">Testimonials</a>
-            <a href="/">Careers</a> 
-            <a href="/">Investments</a>
-            <a href="/">Terms of Service</a>
+            <a href="/">About&nbsp;Us</a>
+            <a href="/">Routes</a> 
+            <a href="/">Bus&nbsp;Pass</a>
+            <a href="/">Help</a> 
           </div>
           <div class="footer__link--items">
             <h2>Contact Us</h2>
-            <a href="/">Contact</a> <a href="/">Support</a>
-            <a href="/">Destinations</a> <a href="/">Sponsorships</a>
+            <a href="/">Contact</a>
+            <a href="/">Support</a>
+            <a href="/">FAQs</a>
           </div>
         </div>
         <div class="footer__link--wrapper">
 
           <div class="footer__link--items">
-            <h2>Social Media</h2>
-            <a href="/">Instagram</a> <a href="/">Facebook</a>
-            <a href="/">Youtube</a> <a href="/">Twitter</a>
+            <h2>More</h2>
+            <a href="/">Enquiry</a>
+            <a href="/">Become&nbsp;Partner</a>
+            <a href="/">Book&nbsp;ticket</a>
           </div>
         </div>
       </div>
@@ -261,7 +262,7 @@
           <div class="social__icons">
             <a
               class="social__icon--link"
-              href="/"
+              href="https://www.facebook.com/iitdharwadofficial/"
               target="_blank"
               aria-label="Facebook"
             >
@@ -269,7 +270,7 @@
             </a>
             <a
               class="social__icon--link"
-              href="/"
+              href="https://www.instagram.com/cdc.iitdh/?hl=en"
               target="_blank"
               aria-label="Instagram"
             >
@@ -277,7 +278,7 @@
             </a>
             <a
               class="social__icon--link"
-              href="//www.youtube.com/channel/UCsKsymTY_4BYR-wytLjex7A?view_as=subscriber"
+              href="https://www.youtube.com/c/iitdharwadofficialchannel"
               target="_blank"
               aria-label="Youtube"
             >
@@ -285,7 +286,7 @@
             </a>
             <a
               class="social__icon--link"
-              href="/"
+              href="https://twitter.com/iitdhrwd?lang=en"
               target="_blank"
               aria-label="Twitter"
             >
@@ -293,7 +294,7 @@
             </a>
             <a
               class="social__icon--link"
-              href="/"
+              href="https://www.linkedin.com/company/iit-dharwad/"
               target="_blank"
               aria-label="LinkedIn"
             >

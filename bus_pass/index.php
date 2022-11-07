@@ -173,7 +173,7 @@
             <div style="text-align:center;">
               <h4 style="margin-top:10px">Use the Bus Pass to book your Tickets</h4>
               <h3 style="margin-top:10px">Happy Journey!</h3>
-              <form action="/SSL-Project/index.php" method="post"><button class="homeBtn">Home</button></form>
+              <a href="/SSL-Project/index.php" ><button class="homeBtn">Home</button></a>
               <p style="margin-top:30px">Have any query?</p>
               <p style="margin-left:15px"><a href="#">Contact Us</a></p>
             </div>
