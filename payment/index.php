@@ -22,9 +22,13 @@
       integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <script src="routes/routes.js"></script>
-  <body style="background-color: black;">
+  <body style= "background-color: rgb(90, 90, 90)">
     <!-- Navbar Section -->
     <nav class="navbar">
             <div class="navbar__container">
@@ -85,44 +89,27 @@
                 </ul>
             </div>
         </nav>
-
-    <!-- Main Section -->
-
-    <div class="row"> 
-      <div class="column1" style="background-color:#aaa;">
-        <h1>Select Seats</h1><br>
-        <?php
-          include('../db.php');
-          $conn = new mysqli($servername, $username, $password, $dbname);
-          // $conn->query("CREATE ")
-          $seats=$conn->query("SELECT * FROM available WHERE routeID=1");
-          while($row=mysqli_fetch_assoc($seats))
-        {
-          echo('<form action="/SSL-Project/payment/" method="POST">');
-          for($i=1;$i<11;$i++)
-          {
-            if($row["seat$i"]==null)
-          {
-            echo(' <input type="checkbox" id="s'.$i.'" name="seat[]" value="'.$i.'">
-              <label for="seat">Seat '.$i.'</label><br>');
-          }
-          else if($row["seat$i"]!=null)
-          {
-            // echo ("Seat $i is reserved");
-            echo '<div><input type="checkbox" id="s'.$i.'" name="s" value="check" disabled><label for="s" style="color:grey;">&nbsp;Seat '.$i.'</label></div>';
-          }
-          if($i!=10){ echo "<br>";} 
-          }
-        }
-        ?>
-        <button class="main__btndate" type="submit">Proceed to book</button>
-      </form>
-      </div>
-      <div class="column2" style="background-color:#bbb;">
-        <!-- <img src="seating_arrangement.jpg"; width=200px; height=500px; alt="bus seating arrangement"; label="bus seating arrangement"> -->
-        <img src="seating_arrangement.jpg" alt="bus seating arrangement" class="busImg" label="bus seating arrangement">
-      </div>
-    </div>
-  </body>
-
-</html>
+        <h1>&nbsp;&nbsp; Payment Options</h1>
+        <div class="form">
+          <form method="POST" action="/SSL-Project/customer_info/index.php">
+            <input type="radio" name="credit_card" value="credit_card"> Credit card
+            <br><br>
+            <input type="radio" name="credit_card" value="credit_card"> Debit card
+            <br><br>
+            <input type="radio" name="credit_card" value="credit_card"> UPI
+            <br><br>
+            <input type="radio" name="credit_card" value="credit_card"> Bus Pass
+            <br>
+            <br>
+            <?php
+              $number_of_seats = count($_POST["seat"]); 
+              echo $number_of_seats.'<br>';
+              for($i=0;$i<$number_of_seats;$i++){
+                echo '<input type="text" name="seat[]" value="'.$_POST['seat'][$i].'" ><br>';
+              }
+            ?>
+            <button class="main__btndate" type="submit">Proceed to pay</button>
+          </form>
+        </div>
+                    </body>
+                    </html>

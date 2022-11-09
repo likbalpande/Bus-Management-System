@@ -9,9 +9,20 @@
         echo('User NOT SignedIn');
     }
 ?>
+<?php
+  $number_of_seats = count($_POST["seat"]); 
+  echo $number_of_seats.'<br>';
+  echo '<input type="text" name="seat" value="'.$number_of_seats.'" ><br>';
+  for($i=0;$i<$number_of_seats;$i++){
+    echo '<input type="text" name="seat" value="'.$_POST["seat"][$i].'" ><br>';
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <style>
+  .error {color: red;}
+  </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SSL BUS Services</title>
@@ -22,9 +33,13 @@
       integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <script src="routes/routes.js"></script>
-  <body style="background-color: black;">
+  <body>
     <!-- Navbar Section -->
     <nav class="navbar">
             <div class="navbar__container">
@@ -85,44 +100,92 @@
                 </ul>
             </div>
         </nav>
-
-    <!-- Main Section -->
-
-    <div class="row"> 
-      <div class="column1" style="background-color:#aaa;">
-        <h1>Select Seats</h1><br>
         <?php
-          include('../db.php');
-          $conn = new mysqli($servername, $username, $password, $dbname);
-          // $conn->query("CREATE ")
-          $seats=$conn->query("SELECT * FROM available WHERE routeID=1");
-          while($row=mysqli_fetch_assoc($seats))
-        {
-          echo('<form action="/SSL-Project/payment/" method="POST">');
-          for($i=1;$i<11;$i++)
-          {
-            if($row["seat$i"]==null)
-          {
-            echo(' <input type="checkbox" id="s'.$i.'" name="seat[]" value="'.$i.'">
-              <label for="seat">Seat '.$i.'</label><br>');
-          }
-          else if($row["seat$i"]!=null)
-          {
-            // echo ("Seat $i is reserved");
-            echo '<div><input type="checkbox" id="s'.$i.'" name="s" value="check" disabled><label for="s" style="color:grey;">&nbsp;Seat '.$i.'</label></div>';
-          }
-          if($i!=10){ echo "<br>";} 
-          }
-        }
-        ?>
-        <button class="main__btndate" type="submit">Proceed to book</button>
-      </form>
-      </div>
-      <div class="column2" style="background-color:#bbb;">
-        <!-- <img src="seating_arrangement.jpg"; width=200px; height=500px; alt="bus seating arrangement"; label="bus seating arrangement"> -->
-        <img src="seating_arrangement.jpg" alt="bus seating arrangement" class="busImg" label="bus seating arrangement">
-      </div>
-    </div>
-  </body>
+// define variables and set to empty values
+$nameErr = $genderErr = $phonenoErr = $age ="";
+$name = $email = $gender = $phoneno = $ageErr = "";
 
-</html>
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (empty($_POST["name"])) {
+    $nameErr = "Name is required";
+  } else {
+    $name = test_input($_POST["name"]);
+  }
+    
+  if (empty($_POST["phoneno"])) {
+    $phonenoErr = "";
+  } else {
+    $phoneno = test_input($_POST["phoneno"]);
+  }
+
+  if (empty($_POST["age"])) {
+    $ageErr = "Age is required";
+  } else {
+    $age = test_input($_POST["age"]);
+  }
+
+  if (empty($_POST["gender"])) {
+    $genderErr = "Gender is required";
+  } else {
+    $gender = test_input($_POST["gender"]);
+  }
+  
+}
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
+
+<h1>Passenger Information</h1>
+
+<?php
+$i=1;
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bus_service_system";
+$conn = new mysqli($servername, $username, $password, $dbname);
+while ($i<=3){
+
+ echo '  <div class="form">
+ <h3>Passenger '.$i.'</h3>
+ <br>
+ <form method="post" action="./">
+  Name <input type="text" name="name">
+  <span class="error">* <?php echo $nameErr;?></span>
+  <br><br>
+  Age <input type="number" name="age">
+  <span class="error">*<?php echo $ageErr;?></span>
+  <br><br>
+  Gender
+  <br>
+  <input type="radio" name="gender" value="0"> Female
+  <br>
+  <input type="radio" name="gender" value="1"> Male
+  <br>
+  <input type="radio" name="gender" value="2"> Other
+  <span class="error">* <?php echo $genderErr;?></span>
+  <br><br>
+  Phone Number <input type="mobile" name="phoneno">
+  <span class="error"><?php echo $phonenoErr;?></span>
+  <br><br>
+ </div>';
+ $i=$i+1;
+
+}
+// $sql = "INSERT INTO `customers` (`customerId`, `name`, `phoneNumber`, `bookingId`, `seatAlloted`, `age`, `gender`) 
+// VALUES( 1, $name, $phoneno, 1, 1,$age, $gender);";
+// $conn->query($sql);
+echo '
+<button class="main__btndate" type="submit">Proceed to pay</button>
+</form>';
+?>
+
+
+
+
+    </body>
+    </html>
