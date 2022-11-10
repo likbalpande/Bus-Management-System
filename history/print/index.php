@@ -13,7 +13,7 @@
 <html lang="en">
 <head>
     <title>Booking History</title>
-    <link rel="stylesheet" href="history.css">
+    <link rel="stylesheet" href="print.css">
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
@@ -106,7 +106,7 @@
                 <?php
 
                     function getPlaceId($placeId){
-                        include('../db.php');
+                        include('../../db.php');
                         $sql_place = "SELECT placeName from places WHERE placeId='".$placeId."';";
                         $res=mysqli_query($conn,$sql_place);
                         if(mysqli_num_rows($res)>0){
@@ -116,8 +116,8 @@
                         return "error";
                     }
 
-                    include('../db.php');
-                    $sql_bookings="SELECT * FROM bookings where userId = ".$_SESSION["userId"]." ;";
+                    include('../../db.php');
+                    $sql_bookings="SELECT * FROM bookings where bookingId = ".$_POST["bookingId"]." ;";
                     $bookings=mysqli_query($conn,$sql_bookings);
                     $count=mysqli_num_rows($bookings);
                     if($count>0){
@@ -154,13 +154,12 @@
                                         <div class="routeCityLabel">Number of Seats: '.$row["numberOfSeats"].'</div>
                                     </div>
                                     <div class="printBtn">
-                                        <form action="./print/index.php" method="post">
-                                            <input type="hidden" name="bookingId" value="'.$row["bookingId"].'">
-                                            <button class="print">Print</button>
-                                        </form>
+                                        <a href="../"><button class="print">Print</button></a>
                                     </div>
                                 </div>
                             ');
+                            for($)
+                            $sql_route="SELECT * FROM routes where routeId = ".$route["numberOfSeats"]." ;";
                         }
                     }
                 ?>
