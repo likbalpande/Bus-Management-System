@@ -86,15 +86,15 @@
         </nav>
 
         <main>
-            <form action="#availableRoutes" method="get" style="width:100%;">
+            <form name="filter" action="#availableRoutes" method="post" style="width:100%;">
                 <div class="searchSection">
                     <div class="searchContainer">
                         <div id="search-from">
                             <p style="color:black;opacity:0.9;padding:0 0 0 8px;font-size:17px;">Boarding City</p>
                             <?php 
-                                if(array_key_exists('fromCity', $_GET)) {
+                                if(array_key_exists('fromCity', $_POST)) {
                                     echo('
-                                        <input id="input-from" value="'.$_GET["fromCity"].'" type="text" size="16" placeholder=" FROM" onkeyup="javascript:searchPlaces(\'from\',this.value)" name="fromCity" required>
+                                        <input id="input-from" value="'.$_POST["fromCity"].'" type="text" size="16" placeholder=" FROM" onkeyup="javascript:searchPlaces(\'from\',this.value)" name="fromCity" required>
                                     ');
                                 }
                                 else{
@@ -114,9 +114,9 @@
                         <div>
                             <p style="color:black;opacity:0.9;padding:0 0 0 8px;font-size:17px;">Destination City</p>
                             <?php 
-                                if(array_key_exists('toCity', $_GET)) {
+                                if(array_key_exists('toCity', $_POST)) {
                                     echo('
-                                        <input id="input-to" value="'.$_GET["toCity"].'" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
+                                        <input id="input-to" value="'.$_POST["toCity"].'" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
                                     ');
                                 }
                                 else{
@@ -130,9 +130,9 @@
                         <div class="dateSelector">
                             <p style="color:black;opacity:0.9;padding:0 0 0 8px;font-size:17px;">Journey Date</p>
                             <?php
-                                if(array_key_exists('date', $_GET)) {
+                                if(array_key_exists('date', $_POST)) {
                                     echo('
-                                        <input id="date" type="date" value="'.$_GET["date"].'" class="search-date" name="date" required>
+                                        <input id="date" type="date" value="'.$_POST["date"].'" class="search-date" name="date" required>
                                     ');
                                 }
                                 else{
@@ -204,18 +204,18 @@
                 }
                 ?>
             <?php 
-                 if(array_key_exists('fromCity', $_GET) && array_key_exists('toCity', $_GET) && array_key_exists('date', $_GET) ) {
+                 if(array_key_exists('fromCity', $_POST) && array_key_exists('toCity', $_POST) && array_key_exists('date', $_POST) ) {
                     include('../db.php');
-                    $fromCity = getPlaceId($_GET['fromCity']);
-                    $toCity = getPlaceId($_GET['toCity']);
+                    $fromCity = getPlaceId($_POST['fromCity']);
+                    $toCity = getPlaceId($_POST['toCity']);
                     $flag=true;
                     if($fromCity==-1||$toCity==-1){
                         $flag=false;
                     }
                     // echo ($fromCity."  ".$toCity."<br><br>");
-                    $sql_routes="SELECT * FROM routes where startingPoint=".$fromCity." and endingPoint=".$toCity." and DATE_FORMAT(startingTime, '%Y-%m-%d') = '".$_GET["date"]."' and routeStatus=1 ";
-                    if(array_key_exists('sortBy', $_GET)){
-                        $args = explode("_",$_GET["sortBy"]);
+                    $sql_routes="SELECT * FROM routes where startingPoint=".$fromCity." and endingPoint=".$toCity." and DATE_FORMAT(startingTime, '%Y-%m-%d') = '".$_POST["date"]."' and routeStatus=1 ";
+                    if(array_key_exists('sortBy', $_POST)){
+                        $args = explode("_",$_POST["sortBy"]);
                         $sql_routes = $sql_routes.'ORDER BY '.$args[0].' '.$args[1];
                     }
                     $sql_routes = $sql_routes.' ;';
@@ -226,14 +226,14 @@
                         echo('
                         <div class="leftPanel">
                         <h3>Sort By</h3>
-                                <!-- <form action="#availableRoutes" method="get"> -->
+                                <!-- <form action="#availableRoutes" method="post"> -->
                                 <div class="sortingCard">
-                                    <h4>'.$_GET['fromCity'].' Time</h4>
+                                    <h4>'.$_POST['fromCity'].' Time</h4>
                                     <div class="fc"><input type="radio" id="startingTime_ASC" name="sortBy" value="startingTime_ASC"><label for="startingTime_ASC" style="font-size:15px">&nbsp;Ascending</label></div>
                                     <div class="fc"><input type="radio" id="startingTime_DESC" name="sortBy" value="startingTime_DESC"><label for="startingTime_DESC" style="font-size:15px">&nbsp;Descending</label></div>
                                 </div>
                                 <div class="sortingCard">
-                                    <h4>'.$_GET['toCity'].' Time</h4>
+                                    <h4>'.$_POST['toCity'].' Time</h4>
                                     <div class="fc"><input type="radio" id="endingTime_ASC" name="sortBy" value="endingTime_ASC"><label for="endingTime_ASC" style="font-size:15px">&nbsp;Ascending</label></div>
                                     <div class="fc"><input type="radio" id="endingTime_DESC" name="sortBy" value="endingTime_DESC"><label for="endingTime_DESC" style="font-size:15px">&nbsp;Descending</label></div>
                                 </div>
@@ -259,13 +259,13 @@
                                     <div class="routeCard">
                                         <div class="routeFrom">
                                             <div class="routeCityLabel">From:</div>
-                                            <div class="routeCity">'.$_GET['fromCity'].'</div>
+                                            <div class="routeCity">'.$_POST['fromCity'].'</div>
                                             <div class="routeTime">At: <b style="color: #8b0224;">'.substr($row["startingTime"],11,5).'</b></div>
                                             <div class="routeDate"><span  style="color: #8b0224;">'.substr(date("D, d M Y H:i:s", strtotime($row["startingTime"])),0,12).'</span> '.substr($row["startingTime"],0,4).'</div>
                                         </div>
                                         <div class="routeFrom">
                                             <div class="routeCityLabel">To:</div>
-                                            <div class="routeCity">'.$_GET['toCity'].'</div>
+                                            <div class="routeCity">'.$_POST['toCity'].'</div>
                                             <div class="routeTime">At: <b style="color: #8b0224;">'.substr($row["endingTime"],11,5).'</b></div>
                                             <div class="routeDate"><span  style="color: #8b0224;">'.substr(date("D, d M Y H:i:s", strtotime($row["endingTime"])),0,12).'</span> '.substr($row["endingTime"],0,4).'</div>
                                         </div>
@@ -275,10 +275,25 @@
                                             <div class="routeBookings">'.$row["numberOfBookings"].' Seats Booked</div>
                                             <div class="routeBookingsLeft">'.(getBusCapacity($row['busId'])-$row["numberOfBookings"]).' Seats Available</div>
                                         </div>
-                                    </div>
-                                    <div class="routeBook">    
-                                        <form action="../availability" method="post"><button class="bookRoute">Book&nbsp;Now</button></form>
-                                    </div>
+                                    </div>');
+                                    if($auth){
+                                        echo('
+                                            <div class="routeBook">    
+                                                <form name="routeData" action="/SSL-Project/availability" method="get">
+                                                    <input type="hidden" name="route_ID" value="'.$row['routeId'].'">
+                                                    <button class="bookRoute" type="submit">Book&nbsp;Now</button>
+                                                </form>
+                                            </div>
+                                        ');
+                                    }
+                                    else{
+                                        echo('
+                                            <div class="routeBook">    
+                                                <a href="/SSL-Project/signin/index.php"><button class="bookRoute">SignIn & Book&nbsp;Now</button></a>
+                                            </div>
+                                        ');
+                                    }
+                                    echo('
                                 </div>
                             ');
                         }
@@ -293,6 +308,12 @@
                 }
             ?>
         </section>
+        <!-- <div class="routeBook">    
+            <form action="/SSL-Project/availability" method="POST">
+                <input type="number" name="route_ID" value="99">
+                <button class="bookRoute" type="submit">Book&nbsp;Now</button>
+            </form>
+        </div> -->
     </div>
 </body>
 </html>

@@ -38,6 +38,10 @@
         $authorized = true;
         // echo'<div>**********From register***********</div>';
     }
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/routes/index.php")) {
+        $authorized = true;
+        // echo'<div>**********From register***********</div>';
+    }
 
     if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/signin/index.php")) {
         include('../db.php');

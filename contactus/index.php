@@ -7,42 +7,11 @@
     }
     else{
         echo('User NOT SignedIn');
-        header('location: /SSL-Project/index.php');
     }
-
-    $validPath = false;
-    // echo $_SERVER["HTTP_REFERER"].'<br>';echo $_SERVER["HTTP_REFERER"];
-    // echo $_SERVER["HTTP_REFERER"];
-    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/payment")) {
-      $validPath = true;
-    }
-    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/payment/index.php")) {
-        $validPath = true;
-    }
-
-    if(! $validPath){
-      header('location: /SSL-Project/index.php');
-    }
-?>  
-<?php
-  include('../db.php');
-  $number_of_seats = count($_POST["seat"]); 
-  $sql_new_booking="INSERT INTO bookings(routeId,userId,paymentType,numberOfSeats) VALUES(".$_POST["routeId"].",".$_SESSION['userId'].",".$_POST["payment_type"].",".$number_of_seats.")";
-  mysqli_query($conn,$sql_new_booking);
-  $bookingId = $conn->insert_id;
-  for ($i = 0; $i < $number_of_seats; $i++) {
-    $seat_number=$_POST['seat'][$i];
-    $sql_insert_seat_occupancy="UPDATE available SET seat$seat_number = '".$bookingId."_".($i+1)."' WHERE (routeId = ".$_POST["routeId"].");";
-    // echo $sql_insert_seat_occupancy;echo '<br>';
-    mysqli_query($conn,$sql_insert_seat_occupancy);
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <style>
-  .error {color: red;}
-  </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SSL BUS Services</title>
@@ -57,12 +26,9 @@
       href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <script type="text/javascript" src="script.js"></script>
   </head>
-  <div id="loader"></div>
-  <div id="content">
   <script src="routes/routes.js"></script>
-  <body style="background-color: white">
+  <body>
     <!-- Navbar Section -->
     <nav class="navbar">
             <div class="navbar__container">
@@ -123,67 +89,34 @@
                 </ul>
             </div>
         </nav>
-        <?php
-// define variables and set to empty values
-$nameErr = $genderErr = $phonenoErr = $age ="";
-$name = $email = $gender = $phoneno = $ageErr = "";
+       <h1> CONTACT US </h1><br>
+    <div class="row">
+       <div class="column1" style="background-color:#aaa;">
+         <i style="font-size:24px" class="fa">&#xf0e0; <a href="mailto:ssl@gmail.com">EMAIL</a></i>
+         <br>
+         <br>
+         <br>
+         <i style="font-size:24px" class="fa">&#xf095; <a href="tel:9813456789">CONTACT NUMBER</a> : </i>  
+       </div>
+      <div class="column2" style="background-color:#bbb;">
+          <form>
+            <label for="name">NAME</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="email">EMAIL</label><br>
+            <input type="email" id="email" name="email"><br>
+            <label for="comp">COMPLAINT</label><br>
+            <textarea id="comp" name="comp" rows="4" cols="50"></textarea> 
+            <br> <br>
 
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-?>
+            <input type="submit" id="s" name="s"><br> 
+          </form>   
 
-<h1>Passenger Information</h1>
-
-<?php
-$i=0;
-
-while ($i<$number_of_seats){
-
- echo '  <div class="form">
-  <h3>Passenger '.($i+1).'</h3>
-  <h3> Seat '.$_POST["seat"][$i].'</h3>
-  <br>
-  <form method="post" action="../history/index.php">
-    Name <input type="text" name="name'.($i+1).'" required>
-    <span class="error">* </span>
-    <br><br>
-    Age <input type="number" name="age'.($i+1).'" required>
-    <span class="error">*</span>
-    <br><br>
-    Gender
-    <span class="error">*</span>
+      </div>
+    </div>
     <br>
-    <input type="radio" name="gender'.($i+1).'" value="Female" required > Female
     <br>
-    <input type="radio" name="gender'.($i+1).'" value="Male" required > Male
     <br>
-    <input type="radio" name="gender'.($i+1).'" value="Other" required > Other
-    <br><br>
-    Phone Number <input type="mobile" name="phoneno'.($i+1).'">
-    <br><br>
- </div>';
- $i=$i+1;
+   
+    </body>             
 
-}
-// $sql = "INSERT INTO `customers` (`customerId`, `name`, `phoneNumber`, `bookingId`, `seatAlloted`, `age`, `gender`) 
-// VALUES( 1, $name, $phoneno, 1, 1,$age, $gender);";
-// $conn->query($sql);
-echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-for ($i = 0; $i < $number_of_seats; $i++) {
-  echo '<input type="hidden" name="seat[]" value="' . $_POST['seat'][$i] . '" >';
-}
-echo'<input type="text" name="bookingId" value="' . $bookingId . '" hidden>
-<button class="main__btndate" type="submit">Proceed to pay</button>
-</form>';
-?>
-<br><br><br><br><br><br>
-
-</div>
-
-
-    </body>
-    </html>
+</html>

@@ -7,42 +7,11 @@
     }
     else{
         echo('User NOT SignedIn');
-        header('location: /SSL-Project/index.php');
     }
-
-    $validPath = false;
-    // echo $_SERVER["HTTP_REFERER"].'<br>';echo $_SERVER["HTTP_REFERER"];
-    // echo $_SERVER["HTTP_REFERER"];
-    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/payment")) {
-      $validPath = true;
-    }
-    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/payment/index.php")) {
-        $validPath = true;
-    }
-
-    if(! $validPath){
-      header('location: /SSL-Project/index.php');
-    }
-?>  
-<?php
-  include('../db.php');
-  $number_of_seats = count($_POST["seat"]); 
-  $sql_new_booking="INSERT INTO bookings(routeId,userId,paymentType,numberOfSeats) VALUES(".$_POST["routeId"].",".$_SESSION['userId'].",".$_POST["payment_type"].",".$number_of_seats.")";
-  mysqli_query($conn,$sql_new_booking);
-  $bookingId = $conn->insert_id;
-  for ($i = 0; $i < $number_of_seats; $i++) {
-    $seat_number=$_POST['seat'][$i];
-    $sql_insert_seat_occupancy="UPDATE available SET seat$seat_number = '".$bookingId."_".($i+1)."' WHERE (routeId = ".$_POST["routeId"].");";
-    // echo $sql_insert_seat_occupancy;echo '<br>';
-    mysqli_query($conn,$sql_insert_seat_occupancy);
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <style>
-  .error {color: red;}
-  </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SSL BUS Services</title>
@@ -57,12 +26,9 @@
       href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <script type="text/javascript" src="script.js"></script>
   </head>
-  <div id="loader"></div>
-  <div id="content">
   <script src="routes/routes.js"></script>
-  <body style="background-color: white">
+  <body>
     <!-- Navbar Section -->
     <nav class="navbar">
             <div class="navbar__container">
@@ -123,67 +89,29 @@
                 </ul>
             </div>
         </nav>
-        <?php
-// define variables and set to empty values
-$nameErr = $genderErr = $phonenoErr = $age ="";
-$name = $email = $gender = $phoneno = $ageErr = "";
+        <h1><i> FAQS </i></h1><br><br><br>
+   
+    <div class="display" style="background-color:grey;">
+    
+      <b> Q.How do you do onine bus reservation on SSL Bus Services?</b><br>
+      <p>Ans: Booking a bus ticket online in India is easy with SSL Bus Services. 
+        Simply enter the Leaving from -- Going to destination details along 
+        with the date you wish to travel in the bus search option on the site. 
+        Within seconds you will be given a list of buses availability for 
+        your route. Select your bus that suits you best for you. 
+        Then just follow the simple steps to the ticket booking payment 
+        process and your seat will be reserved for your bus journey.</p>
+        <br>
+      <b>Q. Do I need to create an account to book bus tickets on SSL Bus Services?</b></br>
+      <p> Ans: No, you can book bus tickets as a guest user by providing required passenger details. However, we recommend you to create an account so that you get the latest information about bus availability, ticket details and other features which will help you book faster during future transactions.</p>
+      <br>
+      <b>Q. How do I book for bus services which are safe and reliable?</b><br>
+      <p>we are assured about safety, reliability while booking your bus tickets with SSL Bus Services.</p>
+      <br>
+      <b>Q. Will I have to pay extra money for online tickets booking?</b><br>
+      <p>Ans:No, there is no need to pay extra charges when booking bus ticket online.</p>
+      <br> <br> <br> <br> <br>
+    </div>
+    </body>             
 
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-?>
-
-<h1>Passenger Information</h1>
-
-<?php
-$i=0;
-
-while ($i<$number_of_seats){
-
- echo '  <div class="form">
-  <h3>Passenger '.($i+1).'</h3>
-  <h3> Seat '.$_POST["seat"][$i].'</h3>
-  <br>
-  <form method="post" action="../history/index.php">
-    Name <input type="text" name="name'.($i+1).'" required>
-    <span class="error">* </span>
-    <br><br>
-    Age <input type="number" name="age'.($i+1).'" required>
-    <span class="error">*</span>
-    <br><br>
-    Gender
-    <span class="error">*</span>
-    <br>
-    <input type="radio" name="gender'.($i+1).'" value="Female" required > Female
-    <br>
-    <input type="radio" name="gender'.($i+1).'" value="Male" required > Male
-    <br>
-    <input type="radio" name="gender'.($i+1).'" value="Other" required > Other
-    <br><br>
-    Phone Number <input type="mobile" name="phoneno'.($i+1).'">
-    <br><br>
- </div>';
- $i=$i+1;
-
-}
-// $sql = "INSERT INTO `customers` (`customerId`, `name`, `phoneNumber`, `bookingId`, `seatAlloted`, `age`, `gender`) 
-// VALUES( 1, $name, $phoneno, 1, 1,$age, $gender);";
-// $conn->query($sql);
-echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-for ($i = 0; $i < $number_of_seats; $i++) {
-  echo '<input type="hidden" name="seat[]" value="' . $_POST['seat'][$i] . '" >';
-}
-echo'<input type="text" name="bookingId" value="' . $bookingId . '" hidden>
-<button class="main__btndate" type="submit">Proceed to pay</button>
-</form>';
-?>
-<br><br><br><br><br><br>
-
-</div>
-
-
-    </body>
-    </html>
+</html>

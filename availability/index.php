@@ -7,8 +7,33 @@
     }
     else{
         echo('User NOT SignedIn');
+        header('location: /SSL-Project/index.php');
     }
-?>
+
+    $routeId=$_GET["route_ID"];
+    // echo '<br>';
+
+    $validPath = false;
+    // echo $_SERVER["HTTP_REFERER"].'<br>';echo $_SERVER["HTTP_REFERER"];
+    // echo $_SERVER["HTTP_REFERER"];
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/routes/index.php#availableRoutes")) {
+      $validPath = true;
+      // echo'<div>**********From SSLP***********</div>';
+    }
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/routes/index.php")) {
+        $validPath = true;
+        // echo'<div>**********From SSLP***********</div>';
+    }
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/routes")) {
+      $validPath = true;
+      // echo'<div>**********From SSLP***********</div>';
+    }
+
+    if(! $validPath){
+      header('location: /SSL-Project/index.php');
+    }
+?>  
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,7 +49,7 @@
     />
   </head>
   <script src="routes/routes.js"></script>
-  <body style="background-color: black;">
+  <body style="background-color: white;">
     <!-- Navbar Section -->
     <nav class="navbar">
             <div class="navbar__container">
@@ -67,7 +92,7 @@
                           <a href="/SSL-Project" class="navbar__links">About&nbsp;Us</a>
                       </li>
                       ');
-                      if($auth){
+                      if($auth && $validPath){
                       echo('
                         <li class="navbar_item profileSection">
                           <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
@@ -92,28 +117,37 @@
       <div class="column1" style="background-color:#aaa;">
         <h1>Select Seats</h1><br>
         <?php
-          include('../db.php');
-          $conn = new mysqli($servername, $username, $password, $dbname);
-          // $conn->query("CREATE ")
-          $seats=$conn->query("SELECT * FROM available WHERE routeID=1");
-          while($row=mysqli_fetch_assoc($seats))
-        {
-          echo('<form action="/SSL-Project/payment/" method="POST">');
-          for($i=1;$i<11;$i++)
-          {
-            if($row["seat$i"]==null)
-          {
-            echo(' <input type="checkbox" id="s'.$i.'" name="seat[]" value="'.$i.'">
-              <label for="seat">Seat '.$i.'</label><br>');
+          if($auth && $validPath){
+            include('../db.php');
+            $sql_q="SELECT * FROM available WHERE routeId=".$routeId." ;";
+            $seats=$conn->query($sql_q);
+            $count=mysqli_num_rows($seats);
+            if($count==0){
+              $sql_create_route_data="INSERT INTO available(routeId) VALUES(".$routeId.") ;";
+              $conn->query($sql_create_route_data);
+              $sql_q="SELECT * FROM available WHERE routeId=".$routeId." ;";
+              $seats=$conn->query($sql_q);
+            }
+            while($row=mysqli_fetch_assoc($seats))
+            {
+              echo('<form action="/SSL-Project/payment/" method="POST">');
+              for($i=1;$i<11;$i++)
+              {
+                if($row["seat$i"]==null)
+              {
+                echo(' <input type="checkbox" id="s'.$i.'" name="seat[]" value="'.$i.'">
+                  <label for="seat">Seat '.$i.'</label><br>');
+              }
+              else if($row["seat$i"]!=null)
+              {
+                // echo ("Seat $i is reserved");
+                echo '<div><input type="checkbox" id="s'.$i.'" name="s" value="check" disabled><label for="s" style="color:grey;">&nbsp;Seat '.$i.'</label></div>';
+              }
+              if($i!=10){ echo "<br>";} 
+              }
+            }
           }
-          else if($row["seat$i"]!=null)
-          {
-            // echo ("Seat $i is reserved");
-            echo '<div><input type="checkbox" id="s'.$i.'" name="s" value="check" disabled><label for="s" style="color:grey;">&nbsp;Seat '.$i.'</label></div>';
-          }
-          if($i!=10){ echo "<br>";} 
-          }
-        }
+          echo '<input type="hidden" name="routeId" value="' . $routeId . '" >';
         ?>
         <button class="main__btndate" type="submit">Proceed to book</button>
       </form>

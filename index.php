@@ -117,7 +117,7 @@
                 // <!-- <li class="navbar__btn"><a href="/" class="button">BUS TICKETS</a></li> -->
                 echo('
                   <li class="navbar__item">
-                    <a href="/SSL-Project" class="navbar__links">About&nbsp;Us</a>
+                    <a href="/SSL-Project/about_us/index.php" class="navbar__links">About&nbsp;Us</a>
                   </li>
                 ');
                 if($auth){
@@ -135,6 +135,9 @@
                   ');
                 }
               ?>
+            <!-- <li class="navbar__item">
+              <a href="/SSL-Project/admin/index.php" class="navbar__links">ADMIN&nbsp;PORTAL</a>
+            </li>   -->
             </ul>
         </div>
     </nav>
@@ -146,54 +149,32 @@
           <h1>SSL BUS SERVICES</h1>
           <br><br><br><br><br><br>
           <main>
-            <form action="/SSL-project/routes/index.php#availableRoutes" method="get" style="width:100%;">
+            <form action="/SSL-Project/routes/index.php#availableRoutes" method="post" style="width:100%;">
                 <div class="searchSection">
                     <div class="searchContainer">
                         <div id="search-from">
                             <h3>Boarding City &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Destination city</h3>
                             <?php 
-                                if(array_key_exists('fromCity', $_GET)) {
-                                    echo('
-                                        <input id="input-from" class="main__btn" value="'.$_GET["fromCity"].'" type="text"  placeholder=" FROM" onkeyup="javascript:searchPlaces(\'from\',this.value)" name="fromCity" required>
-                                    ');
-                                }
-                                else{
                                     echo('
                                         <input id="input-from" class="main__btn" type="text" size="16" placeholder=" FROM" onkeyup="javascript:searchPlaces(\'from\',this.value)" name="fromCity" required>
                                     ');
-                                }
                             ?>
-
                             <span id="from-suggestions"></span>
                             <button  class="main__btndate" onclick="javascript:swapToAndFrom(event)">
                                 <i class="fa-duotone fa-arrow-right-arrow-left" style="color:green;height:20px;width:20px;"></i>
                                 Swap
                             </button>
                             <?php 
-                                if(array_key_exists('toCity', $_GET)) {
-                                    echo('
-                                        <input id="input-to" class="main__btn" value="'.$_GET["toCity"].'" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
-                                    ');
-                                }
-                                else{
                                     echo('
                                         <input id="input-to" class="main__btn" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
                                     ');
-                                }
                             ?>
                             <span id="to-suggestions"></span>
 
                             <?php
-                                if(array_key_exists('date', $_GET)) {
-                                    echo('
-                                        <input id="date" class="main__btn" type="date" value="'.$_GET["date"].'" class="search-date" name="date" required>
-                                    ');
-                                }
-                                else{
                                     echo('
                                         <input id="date" class="main__btndate" type="date" class="search-date" name="date" required>
                                     ');
-                                }
                             ?>
                             <button class="main__btn" type="submit">Search Buses</button>
                         </div>
@@ -231,24 +212,25 @@
         <div class="footer__link--wrapper">
           <div class="footer__link--items">
             <h2>About Us</h2>
-            <a href="/">About&nbsp;Us</a>
+            <a href="/SSL-Project/about_us/index.php">About&nbsp;Us</a>
             <a href="/">Routes</a> 
             <a href="/">Bus&nbsp;Pass</a>
             <a href="/">Help</a> 
           </div>
           <div class="footer__link--items">
             <h2>Contact Us</h2>
-            <a href="/">Contact</a>
+            <a href="/SSL-Project/contactus/index.php">Contact</a>
             <a href="/">Support</a>
-            <a href="/">FAQs</a>
+            <a href="/SSL-project/faq/index.php">FAQs</a>
+            <a href="/">Become&nbsp;Partner</a>
           </div>
         </div>
         <div class="footer__link--wrapper">
 
           <div class="footer__link--items">
             <h2>More</h2>
+            <a href="/SSL-Project/admin/index.php">Admin&nbsp;Portal</a>
             <a href="/">Enquiry</a>
-            <a href="/">Become&nbsp;Partner</a>
             <a href="/">Book&nbsp;ticket</a>
           </div>
         </div>

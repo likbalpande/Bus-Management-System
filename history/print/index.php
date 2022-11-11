@@ -21,7 +21,7 @@
       crossorigin="anonymous"
     />
 </head>
-<script src="routes.js"></script>
+<script src="print.js"></script>
 <body>
     <div class="univ">
         <nav class="navbar">
@@ -79,7 +79,7 @@
         </nav>
 
         <main>
-            <div class="card_container">
+            <div id="card_container">
                 <!-- <div class="ticket_card">
                     <div class="routeFrom">
                         <div class="routeCityLabel">From:</div>
@@ -153,16 +153,33 @@
                                         <div class="routeTime">Fare: <b style="color: #8b0224;">INR '.$route["fare"].'</b></div>
                                         <div class="routeCityLabel">Number of Seats: '.$row["numberOfSeats"].'</div>
                                     </div>
-                                    <div class="printBtn">
+                                    <!--<div class="printBtn">
                                         <a href="../"><button class="print">Print</button></a>
-                                    </div>
+                                    </div>-->
                                 </div>
                             ');
-                            for($)
-                            $sql_route="SELECT * FROM routes where routeId = ".$route["numberOfSeats"]." ;";
+                            echo '<div class="customer_container">';
+                            for($i=1;$i<=$row["numberOfSeats"];$i++){
+                                $sql_customer="SELECT * FROM customers where customerId = '".$row["bookingId"]."_".$i."' ;";
+                                $customer_data=mysqli_query($conn,$sql_customer);
+                                $customer_row=mysqli_fetch_assoc($customer_data);
+                                echo ('
+                                    <div class="customer_info">
+                                        <p>Name: '.$customer_row["name"].'</p>
+                                        <p>Age: '.$customer_row["age"].'</p>
+                                        <p>Gender: '.$customer_row["gender"].'</p>
+                                        <p>Phone Number: '.$customer_row["phoneNumber"].'</p>
+                                        <p>Seat No: '.$customer_row["seatAlloted"].'</p>    
+                                    </div>
+                                ');
+                            }
+                            echo('</div>');
                         }
                     }
                 ?>
+                <div style="width:100%;text-align:center;">
+                    <button class="printBtn" onclick="window.print()">Print</button>
+                </div>
             </div>
         </main>
     </div>

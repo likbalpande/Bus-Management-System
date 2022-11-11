@@ -7,6 +7,7 @@
     }
     else{
         echo('User NOT SignedIn');
+        header('location: /SSL-Project/index.php');
     }
 ?>
 <?php

@@ -33,13 +33,16 @@
     );";
     $conn->query($sql1);
     
+    
     //Insert values in users
     $sql2="INSERT INTO users(userName, pass_word, firstName, lastName) VALUES('likhilesh', 'Password', 'Likhilesh', 'Balpande');"; 
     $sql3="INSERT INTO users(userName, pass_word, firstName, lastName,userToken) VALUES('Varun', 'abcd', 'Varun', 'Bhatt',UUID()); ";
     $sql4="INSERT INTO users(userName, pass_word, firstName, lastName,email,userToken) VALUES('manoj', '1234', 'Manoj', '','manoj@gmail.com',UUID());"; 
+    $sq0l5="INSERT INTO users(userName, pass_word, firstName, lastName,email,userToken) VALUES('ashwin', '123', 'Ashwin', 'Waghmare','ashwin@gmail.com',UUID());"; 
     $conn->query($sql2);  
     $conn->query($sql3);  
     $conn->query($sql4);  
+    $conn->query($sq0l5);  
 
     //Create places table
     $sql5="CREATE TABLE IF NOT EXISTS places(
@@ -105,7 +108,7 @@
     $conn->query($sql11);
 
     // Insert data in payments table
-    $sql12="INSERT INTO payment_type(name) VALUES('Cash'),('Debit Card'),('Credit Card'),('UPI');";
+    $sql12="INSERT INTO payment_type(name) VALUES('Cash'),('Debit Card'),('Credit Card'),('UPI'),('Bus_Pass');";
     $conn->query($sql12);
 
     // Bookings Table
@@ -133,6 +136,8 @@
         phoneNumber VARCHAR(13),
         bookingId INT,
         seatAlloted INT,
+        gender VARCHAR(25),
+        age INT,
         FOREIGN KEY(bookingId) REFERENCES bookings(bookingId) ON DELETE SET NULL
     );";
     $conn->query($sql19);
@@ -170,17 +175,7 @@
             seat8 VARCHAR(255),
             seat9 VARCHAR(255),
             seat10 VARCHAR(255),
-        FOREIGN KEY(routeId) REFERENCES routes(routeId) ON DELETE SET NULL,
-        FOREIGN KEY(seat1) REFERENCES customers(customerId) ON DELETE SET NULL,
-        FOREIGN KEY(seat2) REFERENCES customers(customerId) ON DELETE SET NULL,
-        FOREIGN KEY(seat3) REFERENCES customers(customerId) ON DELETE SET NULL,
-        FOREIGN KEY(seat4) REFERENCES customers(customerId) ON DELETE SET NULL,
-        FOREIGN KEY(seat5) REFERENCES customers(customerId) ON DELETE SET NULL,
-        FOREIGN KEY(seat6) REFERENCES customers(customerId) ON DELETE SET NULL,
-        FOREIGN KEY(seat7) REFERENCES customers(customerId) ON DELETE SET NULL,
-        FOREIGN KEY(seat8) REFERENCES customers(customerId) ON DELETE SET NULL,
-        FOREIGN KEY(seat9) REFERENCES customers(customerId) ON DELETE SET NULL,
-        FOREIGN KEY(seat10) REFERENCES customers(customerId) ON DELETE SET NULL
+        FOREIGN KEY(routeId) REFERENCES routes(routeId) ON DELETE SET NULL
     );";
     $conn->query($sql21);
     $sql21_1="INSERT INTO available(routeId,seat3) values('1','1_1');";
@@ -221,10 +216,25 @@
     );";
     $conn->query($sql20);
 
+    //$temp = "DROP TABLE admins;";
+    //$conn->query($temp);
+    $sql21 = "CREATE TABLE IF NOT EXISTS admins(
+        adminId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        Username VARCHAR(25) NOT NULL UNIQUE,
+        Pass_word VARCHAR(255) NOT NULL
+        );";
+    $conn->query($sql21);
+
+    //Insert admin details in admins
+
+    $sql23 = "INSERT INTO admins(Username,Pass_word) VALUES('amruthago','123456');";
+    $conn->query($sql23);
+
     // //Add payment details to Bookings table
     // $sql21="ALTER TABLE bookings
     //      ADD paymentDetails VARCHAR(251);";
     // $conn->query($sql21);
+
 
     // Check connection
         // if ($conn->connect_error) {

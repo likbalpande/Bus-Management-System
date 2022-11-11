@@ -7,6 +7,7 @@
     }
     else{
         echo('User NOT SignedIn');
+        header('location: /SSL-Project/index.php');
     }
 ?>
   <!DOCTYPE html>
@@ -22,6 +23,27 @@
     />
 </head>
 <script src="routes.js"></script>
+<?php
+    include('../db.php');
+    $bookingId=$_POST["bookingId"];
+    for ($i=1; $i<=count($_POST["seat"]);$i++)
+    {
+        $name=$_POST["name$i"];
+        $gender=$_POST["gender$i"];
+        $phoneno='';
+        if(isset($POST_["phoneno"]))$phoneno=$_POST["phoneno$i"];
+        $age=$_POST["age$i"];
+        $sql_add="INSERT INTO customers(customerId,name,phoneNumber,gender,age,seatAlloted) 
+        VALUES ('".$bookingId."_".$i."', '$name', '$phoneno', '$gender', $age, ".$_POST['seat'][($i-1)].")";
+        $res = $conn->query($sql_add);
+        // echo $name;
+        // echo $gender;
+        // echo $phoneno;
+        // echo $age;
+        // echo $allotment;
+        // ECHO $sql_add;
+    }
+?>
 <body>
     <div class="univ">
         <nav class="navbar">
