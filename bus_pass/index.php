@@ -51,7 +51,7 @@
     />
   </head>
   <!-- <script src="routes/routes.js"></script> -->
-  <body style="background-color: cyan;">
+  <body style="background-color: #453e3e;">
     <!-- Navbar Section -->
     <nav class="navbar">
       <div class="navbar__container">
@@ -90,16 +90,15 @@
             ');
             if($auth){
               echo('
-                <li class="navbar_item profileSection">
-                  <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
-                  <div class="profileContent">
-                      <div class="profileMenuContent">Edit Profile</div>
-                      <div class="profileMenuContent">Bookings</div>
-                      <div class="profileMenuContent"><a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a></div>
-                      <div class="profileMenuContent">Help</div>
-                      <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
-                  </div>
-                </li>
+              <li class="navbar_item profileSection">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
+                <div class="profileContent">
+                    <div class="profileMenuContent"><a href="/SSL-Project/edit_profile/index.php">Edit&nbsp;Profile</a></div>
+                    <div class="profileMenuContent"><a href="/SSL-Project/history/index.php">Bookings</a></div>
+                    <div class="profileMenuContent"><a href="/SSL-Project/contactus/index.php">Help</a></div>
+                    <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
+                </div>
+              </li>
               ');
             }
           ?>
@@ -126,7 +125,7 @@
                 $row=mysqli_fetch_assoc($res);
                 echo('<h3 style="margin-top:10px">Your Bus Pass is Valid Till: </h3>');
                 echo('<p style="color:rgb(98, 58, 6); font-size:17px;margin:10px 0 0 103px;"> YYYY-MM-DD HH-MM-SS </p> ');
-                echo('<b><p style="color:rgb(122, 32, 32); font-size:22px;margin:5px 0 20px 100px;"> '.$row["validTill"].' </p></b> ');
+                echo('<b><p style="color:green; font-size:22px;margin:5px 0 20px 100px;"> '.$row["validTill"].' </p></b> ');
               }
               else{
                 echo('<h4 style="margin-top:10px">It seems your Bus Pass has EXPIRED!</h4>');

@@ -2,11 +2,11 @@
     $auth=false;
     session_start();
     if(isset($_SESSION['userId'])){
-        echo('User SignedIn<br>');
+        // echo('User SignedIn<br>');
         $auth = true;
     }
     else{
-        echo('User NOT SignedIn');
+        // echo('User NOT SignedIn');
     }
 ?>
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
     />
   </head>
   <script src="routes/routes.js"></script>
-  <body>
+  <body style="min-height:100vh;">
     <!-- Navbar Section -->
     <nav class="navbar">
             <div class="navbar__container">
@@ -68,7 +68,7 @@
                       // <!-- <li class="navbar__btn"><a href="/" class="button">BUS TICKETS</a></li> -->
                       echo('
                       <li class="navbar__item">
-                          <a href="/SSL-Project" class="navbar__links">About&nbsp;Us</a>
+                          <a href="/SSL-Project/about_us/index.php" class="navbar__links">About&nbsp;Us</a>
                       </li>
                       ');
                       if($auth){
@@ -89,34 +89,29 @@
                 </ul>
             </div>
         </nav>
-       <h1> CONTACT US </h1><br>
-    <div class="row">
-       <div class="column1" style="background-color:#aaa;">
-         <i style="font-size:24px" class="fa">&#xf0e0; <a href="mailto:ssl@gmail.com">EMAIL</a></i>
-         <br>
-         <br>
-         <br>
-         <i style="font-size:24px" class="fa">&#xf095; <a href="tel:9813456789">CONTACT NUMBER</a> : </i>  
-       </div>
-      <div class="column2" style="background-color:#bbb;">
-          <form>
-            <label for="name">NAME</label><br>
-            <input type="text" id="name" name="name"><br>
-            <label for="email">EMAIL</label><br>
-            <input type="email" id="email" name="email"><br>
-            <label for="comp">COMPLAINT</label><br>
-            <textarea id="comp" name="comp" rows="4" cols="50"></textarea> 
-            <br> <br>
-
-            <input type="submit" id="s" name="s"><br> 
+        <h1> CONTACT US </h1>
+        <div class="row">
+          <div class="column1" style="background-color:#aaa;"><br><br><br><br>
+          <i style="font-size:24px" class="fa">&#xf0e0; <a href="mailto:ssl@gmail.com" style="color:black;">Email: ssl@gmail.com</a></i>
+          <br>
+          <br>
+          <br>
+          <i style="font-size:24px" class="fa">&#xf095; <a href="tel:9813456789" style="color:black;">Contact Number: 9813456789</a></i>  
+        </div>
+        <div class="column2" style="background-color:#bbb;">
+          <form action="../index.php" method="post">
+            <label for="name"><h3>Name</h3></label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email"><h3>Email</h3></label><br>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="comp"><h3>Query/Complaint</h3></label><br>
+            <textarea id="comp" name="description" rows="4" cols="50" required></textarea> 
+            <br><br>
+            <input class="main__btn" type="submit" id="s" name="s"><br> 
           </form>   
-
-      </div>
-    </div>
-    <br>
-    <br>
-    <br>
-   
+        </div>
+      </div><br><br><br>
+      <div style="width:100%; color:brown;padding-left:10px;">If you have forgot the password, please contact us.</div>
     </body>             
 
 </html>

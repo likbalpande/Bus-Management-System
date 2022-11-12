@@ -2,11 +2,11 @@
     $auth=false;
     session_start();
     if(isset($_SESSION['userId'])){
-        echo('User SignedIn<br>');
+        // echo('User SignedIn<br>');
         $auth = true;
     }
     else{
-        echo('User NOT SignedIn');
+        // echo('User NOT SignedIn');
     }
 ?>
   <!DOCTYPE html>
@@ -56,18 +56,18 @@
                     // <!-- <li class="navbar__btn"><a href="/" class="button">BUS TICKETS</a></li> -->
                     echo('
                     <li class="navbar__item">
-                        <a href="/SSL-Project" class="navbar__links">About&nbsp;Us</a>
+                        <a href="/SSL-Project/about_us/index.php" class="navbar__links">About&nbsp;Us</a>
                     </li>
                     ');
                     if($auth){
                     echo('
-                        <li class="navbar_item profileSection">
+                    <li class="navbar_item profileSection">
                         <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
                         <div class="profileContent">
-                            <div class="profileMenuContent">Edit Profile</div>
-                            <div class="profileMenuContent">Bookings</div>
-                            <div class="profileMenuContent">Bus&nbsp;Pass</div>
-                            <div class="profileMenuContent">Help</div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/edit_profile/index.php">Edit&nbsp;Profile</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/history/index.php">Bookings</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/contactus/index.php">Help</a></div>
                             <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
                         </div>
                     </li>
@@ -90,59 +90,60 @@
                 <div class="searchSection">
                     <div class="searchContainer">
                         <div id="search-from">
-                            <p style="color:black;opacity:0.9;padding:0 0 0 8px;font-size:17px;">Boarding City</p>
+                            <p style="color:white;opacity:0.9;padding:0 0 0 8px;font-size:25px;">Boarding City</p>
                             <?php 
                                 if(array_key_exists('fromCity', $_POST)) {
                                     echo('
-                                        <input id="input-from" value="'.$_POST["fromCity"].'" type="text" size="16" placeholder=" FROM" onkeyup="javascript:searchPlaces(\'from\',this.value)" name="fromCity" required>
+                                        <input id="input-from" class="main__btn" value="'.$_POST["fromCity"].'" type="text" size="16" placeholder=" FROM" onkeyup="javascript:searchPlaces(\'from\',this.value)" name="fromCity" required>
                                     ');
                                 }
                                 else{
                                     echo('
-                                        <input id="input-from" type="text" size="16" placeholder=" FROM" onkeyup="javascript:searchPlaces(\'from\',this.value)" name="fromCity" required>
+                                        <input id="input-from" class="main__btn" type="text" size="16" placeholder=" FROM" onkeyup="javascript:searchPlaces(\'from\',this.value)" name="fromCity" required>
                                     ');
                                 }
                             ?>
                             <span id="from-suggestions"></span>
                         </div>
                         <div>
-                            <button class="buttonT1" onclick="javascript:swapToAndFrom(event)">
-                                <i class="fa-duotone fa-arrow-right-arrow-left" style="color:green;height:20px;width:20px;"></i>
-                                Swap
+                        <br><br>
+                            <button class="main__btndate" onclick="javascript:swapToAndFrom(event)">
+                                  Swap
                             </button>
                         </div>
                         <div>
-                            <p style="color:black;opacity:0.9;padding:0 0 0 8px;font-size:17px;">Destination City</p>
+                            <p style="color:white;opacity:0.9;padding:0 0 0 8px;font-size:25px;">Destination City</p>
                             <?php 
                                 if(array_key_exists('toCity', $_POST)) {
                                     echo('
-                                        <input id="input-to" value="'.$_POST["toCity"].'" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
+                                        <input id="input-to" class="main__btn" value="'.$_POST["toCity"].'" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
                                     ');
                                 }
                                 else{
                                     echo('
-                                        <input id="input-to" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
+                                        <input id="input-to" class="main__btn" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
                                     ');
                                 }
                             ?>
                             <span id="to-suggestions"></span>
                         </div>
                         <div class="dateSelector">
-                            <p style="color:black;opacity:0.9;padding:0 0 0 8px;font-size:17px;">Journey Date</p>
+                            <p style="color:white;opacity:0.9;padding:0 0 0 8px;font-size:25px;">Journey Date</p>
                             <?php
                                 if(array_key_exists('date', $_POST)) {
                                     echo('
-                                        <input id="date" type="date" value="'.$_POST["date"].'" class="search-date" name="date" required>
+                                        <input id="date" class="main__btn" type="date" value="'.$_POST["date"].'" class="search-date" name="date" required>
                                     ');
                                 }
                                 else{
                                     echo('
-                                        <input id="date" type="date" class="search-date" name="date" required>
+                                        <input id="date" class="main__btndate" type="date" class="search-date" name="date" required>
                                     ');
                                 }
                             ?>
                         </div>
-                        <button class="searchBtn" type="submit">Search</button>
+                        
+                        <button class="main__btn" type="submit">Search</button>
                     </div>
                 </div>
             <!-- </form>  -->
@@ -242,7 +243,7 @@
                                     <div class="fc"><input type="radio" id="fare_ASC" name="sortBy" value="fare_ASC"><label for="fare_ASC" style="font-size:15px">&nbsp;Ascending</label></div>
                                     <div class="fc"><input type="radio" id="fare_DESC" name="sortBy" value="fare_DESC"><label for="fare_DESC" style="font-size:15px">&nbsp;Descending</label></div>
                                 </div>
-                                <button type="submit" class="buttonT1">Apply</button>
+                                <button type="submit" class="main__btn">Apply</button>
                             </form>
                         </div>
                         ');
@@ -315,5 +316,88 @@
             </form>
         </div> -->
     </div>
+
+    <div class="footer__container">
+      <div class="footer__links">
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>About Us</h2>
+            <a href="/SSL-Project/about_us/index.php">About&nbsp;Us</a>
+            <a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a>
+            <a href="/SSL-Project/contactus/index.php">Help</a> 
+          </div>
+          <div class="footer__link--items">
+            <h2>Contact Us</h2>
+            <a href="/SSL-Project/contactus/index.php">Contact</a>
+            <a href="/">Support</a>
+            <a href="/SSL-Project/faq/index.php">FAQs</a>
+          </div>
+          <div class="footer__link--items">
+             <h2> <a href="/SSL-Project/admin/index.php" class="navbar__links">Admin Portal</a></h2>
+           </div> 
+        </div>
+        <div class="footer__link--wrapper">
+
+         
+        </div>
+      </div>
+      <section class="social__media">
+        <div class="social__media--wrap">
+          <div class="footer__logo">
+            <a href="/SSL-Project/index.php" id="footer__logo"><i class="fas fa-bus"></i>SSL BUS SERVICE</a>
+          </div>
+          <p class="website__rights">© SSL 2022. All rights reserved</p>
+          <div class="social__icons">
+            <a
+              class="social__icon--link"
+              href="https://www.facebook.com/iitdharwadofficial/"
+              target="_blank"
+              aria-label="Facebook"
+              title="IIT DH Facebook"
+            >
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.instagram.com/cdc.iitdh/?hl=en"
+              target="_blank"
+              aria-label="Instagram"
+              title="IIT DH Instagram"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.youtube.com/c/iitdharwadofficialchannel"
+              target="_blank"
+              aria-label="Youtube"
+              title="IIT DH Youtube"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://twitter.com/iitdhrwd?lang=en"
+              target="_blank"
+              aria-label="Twitter"
+              title="IIT DH Twitter"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.linkedin.com/company/iit-dharwad/"
+              target="_blank"
+              aria-label="LinkedIn"
+              title="IIT DH LinkedIn"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>

@@ -120,7 +120,7 @@
   display:block;
   position: absolute;
   border-radius: 6px;
-  background-color: #f1f1f1;
+  background-color: #d29393;
   min-width: 150px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -128,22 +128,22 @@
 }
 .profileMenuContent{
   margin:7px;
-  border: 1px solid lightgray;
+  border: 1px solid rgb(43, 41, 41);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0px 10px;
   height: 32px;
   border-radius: 6px;
-  color: grey;
+  color: rgb(92, 76, 76);
   cursor: pointer;
   font-size: 18px;
 }
 .profileMenuContent:hover{
   font-size: 20px;
-  color: #f77062;
+  color: #ea0f0f;
   transition: 0.2s;
-  border: 1px solid #f77062;
+  /* border: 1px solid rgba(165, 42, 42, 0.689); */
 }
 .profileSection:hover .avatar{
   transition: 0.2s;
@@ -166,12 +166,13 @@
   align-items: center;
   justify-self: center;
   margin: 0 auto;
-  height: 90vh;
+  height: 50vh;
   z-index: 1;
   width: 100%;
   max-width: 1300px;
   padding-right: 50px;
   padding-left: 50px;
+  padding-bottom:20px;
 }
 
 .main__content {
@@ -257,7 +258,7 @@
   left: 0;
   width: 0;
   height: 100%;
-  background: #4837ff;
+  background: #f2ff372f;
   text-decoration-color: seashell;
   transition: all 0.35s;
   border-radius: 4px;

@@ -2,11 +2,11 @@
     $auth=false;
     session_start();
     if(isset($_SESSION['userId'])){
-        echo('User SignedIn<br>');
+        // echo('User SignedIn<br>');
         $auth = true;
     }
     else{
-        echo('User NOT SignedIn');
+        // echo('User NOT SignedIn');
         header('location: /SSL-Project/index.php');
     }
 ?>
@@ -24,24 +24,27 @@
 </head>
 <script src="routes.js"></script>
 <?php
-    include('../db.php');
-    $bookingId=$_POST["bookingId"];
-    for ($i=1; $i<=count($_POST["seat"]);$i++)
-    {
-        $name=$_POST["name$i"];
-        $gender=$_POST["gender$i"];
-        $phoneno='';
-        if(isset($POST_["phoneno"]))$phoneno=$_POST["phoneno$i"];
-        $age=$_POST["age$i"];
-        $sql_add="INSERT INTO customers(customerId,name,phoneNumber,gender,age,seatAlloted) 
-        VALUES ('".$bookingId."_".$i."', '$name', '$phoneno', '$gender', $age, ".$_POST['seat'][($i-1)].")";
-        $res = $conn->query($sql_add);
-        // echo $name;
-        // echo $gender;
-        // echo $phoneno;
-        // echo $age;
-        // echo $allotment;
-        // ECHO $sql_add;
+    $uploadData=false;
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/customer_info/index.php")) {
+        $uploadData=true;
+    }
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/customer_info")) {
+        $uploadData=true;
+    }
+    if($uploadData){
+        include('../db.php');
+        $bookingId=$_POST["bookingId"];
+        for ($i=1; $i<=count($_POST["seat"]);$i++)
+        {
+            $name=$_POST["name$i"];
+            $gender=$_POST["gender$i"];
+            $phoneno='';
+            if(isset($POST_["phoneno"]))$phoneno=$_POST["phoneno$i"];
+            $age=$_POST["age$i"];
+            $sql_add="INSERT INTO customers(customerId,name,phoneNumber,gender,age,seatAlloted) 
+            VALUES ('".$bookingId."_".$i."', '$name', '$phoneno', '$gender', $age, ".$_POST['seat'][($i-1)].")";
+            $res = $conn->query($sql_add);
+        }
     }
 ?>
 <body>
@@ -58,7 +61,7 @@
                     if($auth){
                     echo('
                         <li class="navbar__item">
-                            <a href="/SSL-Project/routes" class="navbar__links">Booking&nbsp;History</a>
+                            <a href="/SSL-Project/routes" class="navbar__links">Search&nbsp;Route</a>
                         </li>
                         <li class="navbar__item">
                             <a href="/SSL-Project" class="navbar__links">Home</a>
@@ -83,13 +86,13 @@
                     ');
                     if($auth){
                     echo('
-                        <li class="navbar_item profileSection">
+                    <li class="navbar_item profileSection">
                         <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
                         <div class="profileContent">
-                            <div class="profileMenuContent">Edit Profile</div>
-                            <div class="profileMenuContent">Bookings</div>
-                            <div class="profileMenuContent">Bus&nbsp;Pass</div>
-                            <div class="profileMenuContent">Help</div>
+                            <div class="profileMenuContent"><a href="/SSL-project/edit_profile/index.php">Edit&nbsp;Profile</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/history/index.php">Bookings</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/contactus/index.php">Help</a></div>
                             <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
                         </div>
                     </li>
@@ -139,7 +142,7 @@
                     }
 
                     include('../db.php');
-                    $sql_bookings="SELECT * FROM bookings where userId = ".$_SESSION["userId"]." ;";
+                    $sql_bookings="SELECT * FROM bookings where userId = ".$_SESSION["userId"]." ORDER BY bookingDate DESC;";
                     $bookings=mysqli_query($conn,$sql_bookings);
                     $count=mysqli_num_rows($bookings);
                     if($count>0){
@@ -184,6 +187,16 @@
                                 </div>
                             ');
                         }
+                    }
+                    else{
+                        echo('
+                            <div class="ticket_card">
+                                <br>You don\'t have any bookings yet<br><br>
+                            </div>
+                            <div style="width:100%;text-align:center">
+                                <a href="/SSL-Project/routes">Explore Routes</a><br><br>
+                            </div>
+                        ');
                     }
                 ?>
             </div>

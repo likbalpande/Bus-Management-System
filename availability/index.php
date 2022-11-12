@@ -63,7 +63,7 @@
                       if($auth){
                       echo('
                           <li class="navbar__item">
-                              <a href="/SSL-Project/routes" class="navbar__links">Booking&nbsp;History</a>
+                              <a href="/SSL-Project/history/index.php" class="navbar__links">Booking&nbsp;History</a>
                           </li>
                           <li class="navbar__item">
                               <a href="/SSL-Project" class="navbar__links">Home</a>
@@ -89,21 +89,21 @@
                       // <!-- <li class="navbar__btn"><a href="/" class="button">BUS TICKETS</a></li> -->
                       echo('
                       <li class="navbar__item">
-                          <a href="/SSL-Project" class="navbar__links">About&nbsp;Us</a>
+                          <a href="/SSL-Project/about_us/index.php" class="navbar__links">About&nbsp;Us</a>
                       </li>
                       ');
                       if($auth && $validPath){
                       echo('
-                        <li class="navbar_item profileSection">
-                          <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
-                          <div class="profileContent">
-                              <div class="profileMenuContent">Edit Profile</div>
-                              <div class="profileMenuContent">Bookings</div>
-                              <div class="profileMenuContent">Bus&nbsp;Pass</div>
-                              <div class="profileMenuContent">Help</div>
-                              <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
-                          </div>
-                        </li>
+                      <li class="navbar_item profileSection">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
+                        <div class="profileContent">
+                            <div class="profileMenuContent"><a href="/SSL-Project/edit_profile/index.php">Edit&nbsp;Profile</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/history/index.php">Bookings</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/contactus/index.php">Help</a></div>
+                            <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
+                        </div>
+                      </li>
                       ');
                       }
                   ?>
@@ -114,7 +114,7 @@
     <!-- Main Section -->
 
     <div class="row"> 
-      <div class="column1" style="background-color:#aaa;">
+      <div class="column1">
         <h1>Select Seats</h1><br>
         <?php
           if($auth && $validPath){
@@ -135,13 +135,13 @@
               {
                 if($row["seat$i"]==null)
               {
-                echo(' <input type="checkbox" id="s'.$i.'" name="seat[]" value="'.$i.'">
-                  <label for="seat">Seat '.$i.'</label><br>');
+                echo(' <input type="checkbox" id="seat'.$i.'" name="seat[]" value="'.$i.'">
+                  <label for="seat'.$i.'">Seat '.$i.'</label><br>');
               }
               else if($row["seat$i"]!=null)
               {
                 // echo ("Seat $i is reserved");
-                echo '<div><input type="checkbox" id="s'.$i.'" name="s" value="check" disabled><label for="s" style="color:grey;">&nbsp;Seat '.$i.'</label></div>';
+                echo '<div><input type="checkbox" id="seat'.$i.'" name="s" value="check" disabled><label for="seat'.$i.'" style="color:rgb(77, 74, 74);">&nbsp;Seat '.$i.'</label></div>';
               }
               if($i!=10){ echo "<br>";} 
               }
@@ -152,11 +152,93 @@
         <button class="main__btndate" type="submit">Proceed to book</button>
       </form>
       </div>
-      <div class="column2" style="background-color:#bbb;">
+      <div class="column2">
         <!-- <img src="seating_arrangement.jpg"; width=200px; height=500px; alt="bus seating arrangement"; label="bus seating arrangement"> -->
         <img src="seating_arrangement.jpg" alt="bus seating arrangement" class="busImg" label="bus seating arrangement">
       </div>
     </div>
+    <div class="footer__container">
+      <div class="footer__links">
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>About Us</h2>
+            <a href="/SSL-Project/about_us/index.php">About&nbsp;Us</a>
+            <a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a>
+            <a href="/SSL-Project/contactus/index.php">Help</a> 
+          </div>
+          <div class="footer__link--items">
+            <h2>Contact Us</h2>
+            <a href="/SSL-Project/contactus/index.php">Contact</a>
+            <a href="/">Support</a>
+            <a href="/SSL-Project/faq/index.php">FAQs</a>
+          </div>
+          <div class="footer__link--items">
+             <h2> <a href="/SSL-Project/admin/index.php" class="navbar__links">Admin Portal</a></h2>
+           </div> 
+        </div>
+        <div class="footer__link--wrapper">
+
+         
+        </div>
+      </div>
+      <section class="social__media">
+        <div class="social__media--wrap">
+          <div class="footer__logo">
+            <a href="/SSL-Project/index.php" id="footer__logo"><i class="fas fa-bus"></i>SSL BUS SERVICE</a>
+          </div>
+          <p class="website__rights">© SSL 2022. All rights reserved</p>
+          <div class="social__icons">
+            <a
+              class="social__icon--link"
+              href="https://www.facebook.com/iitdharwadofficial/"
+              target="_blank"
+              aria-label="Facebook"
+              title="IIT DH Facebook"
+            >
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.instagram.com/cdc.iitdh/?hl=en"
+              target="_blank"
+              aria-label="Instagram"
+              title="IIT DH Instagram"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.youtube.com/c/iitdharwadofficialchannel"
+              target="_blank"
+              aria-label="Youtube"
+              title="IIT DH Youtube"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://twitter.com/iitdhrwd?lang=en"
+              target="_blank"
+              aria-label="Twitter"
+              title="IIT DH Twitter"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.linkedin.com/company/iit-dharwad/"
+              target="_blank"
+              aria-label="LinkedIn"
+              title="IIT DH LinkedIn"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
   </body>
 
 </html>

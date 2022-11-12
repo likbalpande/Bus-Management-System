@@ -45,8 +45,8 @@
                 </div>
                 <div class="moreOptions">
                     <div style="text-align: center;">
-                        <a href="#">Forgot Password ?</a><br><br>
-                        <a href="#">Contact Us</a>
+                        <a href="/SSL-Project/admin/forgot_password.php">Forgot Password ?</a><br><br>
+                        <a href="/SSL-Project/contactus/index.php">Contact Us</a>
                     </div>
                 </div>
             </div>

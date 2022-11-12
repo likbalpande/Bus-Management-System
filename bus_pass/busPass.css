@@ -173,20 +173,22 @@ button:active{
 .univ{
   width:100vw;
   height:90vh;
-  background-image: radial-gradient(#32b04bd9,#229e1beb,#169b2c);
+  background-image: radial-gradient(#453e3e,#383434,#4d4444);
 }
 .container{
   box-sizing: border-box;
+  align-self: center;
   margin:0px auto;
+  border: 4px solid #bfb5b5;;
   height:fit-content;
   min-width: 550px;
   width: fit-content;
-  background-image: radial-gradient(#f2b84377,#f2b84354,#f2de4359);
+  background-image: radial-gradient(#de5858,#e95050,#e44f4f);
   margin-bottom: 5rem;
   padding:40px;
 }
 .form{
-  background-color: rgba(249, 168, 106, 0.717);
+  background-color: rgb(182, 176, 176);
   margin: 0 auto;
   width:450px;
   display: flex; justify-content: space-around; align-items: center;
@@ -200,12 +202,12 @@ button:active{
   padding:6px 10px 3px;
   cursor: pointer;
   border:1px solid rgba(255, 255, 255, 0.459);
-  background-color: rgba(5, 97, 255, 0.75);
+  background-color: rgb(33, 95, 202);
   color: rgba(255, 255, 255, 0.774);
   border-radius: 5px;
 }
 .buyPassBtn:hover{
-  background-color: rgba(5, 97, 255, 0.95);
+  background-color: rgb(17, 53, 172);
   scale: 1.01;
   transition: 0.1s;
 }
@@ -215,8 +217,8 @@ button:active{
   font-size: 20px;
   padding:7px 12px;
   border-radius: 7px;
-  background: #f77062;
+  background: #c37878;
   color: #fff;
-  border: 1px solid #fff;
+  border: 0.5px solid rgb(61, 61, 61);
   cursor: pointer;
 }

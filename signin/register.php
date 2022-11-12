@@ -78,7 +78,7 @@
                                 if($count>0){
                                     echo ('<h5>Username \'<span style="color:rgb(196, 51, 51)">'.$userName.'</span>\' is already taken</h5><br>
                                     <form id="registerForm" autocomplete="off" action="register.php" method="post">
-                                        <label for="r1-username">Username<span style="color:red;">*</span></label>
+                                        <label for="r1-username" ><p>Username</p><span style="color:red;">*<br><br></span></label>
                                         <input type="text" id="r1-username" size="22" name="username" placeholder="Please set username" required><br>
                                         <div class="submission">
                                             <button class="cp" type="submit">Check Username</button><br><br>
@@ -92,15 +92,16 @@
                                     echo('
                                     <form id="registerForm" autocomplete="off" action="../index.php" method="post">
                                         <input type="hidden" id="r2-username" size="22" name="username" value="'.$userName.'" style="padding:2px 7px">
-                                        <p style="padding-left:2px;font-size:18px">Username \'<span style="color:green"><b>'.$userName.'</b></span>\' is available</p><br>
-                                        <label for="r2-password">Password<span style="color:red;">*</span></label><br>
-                                        <input type="password" id="r2-password" size="22" name="password" placeholder="Please set password" required><br><br>
-                                        <label for="email">Email</label><br>
-                                        <input type="email" id="email" size="22" name="email" placeholder="Please provide email"><br><br>
+                                        <p style="padding-left:2px;font-size:18px">Username \'<span style="color:blue"><b>'.$userName.'</b></span>\' is available</p><br>
                                         <label for="firstName">First Name<span style="color:red;">*</span></label><br>
                                         <input type="text" id="firstName" size="22" name="firstName" placeholder="Please provide first name" required><br><br>
                                         <label for="lastName">Last Name</label><br>
                                         <input type="text" id="lastName" size="22" name="lastName" placeholder="Please provide last name"><br><br>
+                                        <label for="r2-password">Password<span style="color:red;">*</span></label><br>
+                                        <input type="password" id="r2-password" size="22" name="password" placeholder="Please set password" required><br><br>
+                                        <label for="email">Email</label><br>
+                                        <input type="email" id="email" size="22" name="email" placeholder="Please provide email"><br><br>
+                                       
                                         <div class="submission">
                                             <button class="cp" type="submit">Register</button><br><br>
                                         </div>
@@ -112,7 +113,7 @@
                         else if($authorized){
                             echo('
                             <form id="registerForm" autocomplete="off" action="register.php" method="post">
-                                <label for="r1-username">Username<span style="color:red;">*</span></label>
+                                <label for="r1-username">Username<span style="color:red;">*</span></label><br>
                                 <input type="text" id="r1-username" size="22" name="username" placeholder="Please set username" required><br>
                                 <div class="submission">
                                     <button class="cp" type="submit">Check Username</button><br><br>
@@ -130,12 +131,98 @@
                 </div>
                 <div class="moreOptions">
                     <div style="text-align: center; margin-top:-20px;padding-bottom:25px;">
-                        <a href="#">Contact Us</a>
+                        <a href="/SSL_Project/contactus/index.php">Contact Us</a>
                     </div>
                 </div>
+              
             </div>
+            <br><br><br><br><br><br><br>
         </div>
+      
     </div>
+
+    <div class="footer__container">
+      <div class="footer__links">
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>About Us</h2>
+            <a href="/SSL-Project/about_us/index.php">About&nbsp;Us</a>
+            <a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a>
+            <a href="/SSL-Project/contactus/index.php">Help</a> 
+          </div>
+          <div class="footer__link--items">
+            <h2>Contact Us</h2>
+            <a href="/SSL-Project/contactus/index.php">Contact</a>
+            <a href="/">Support</a>
+            <a href="/SSL-Project/faq/index.php">FAQs</a>
+          </div>
+          <div class="footer__link--items">
+             <h2> <a href="/SSL-Project/admin/index.php" class="navbar__links">Admin Portal</a></h2>
+           </div> 
+        </div>
+        <div class="footer__link--wrapper">
+
+         
+        </div>
+      </div>
+      <section class="social__media">
+        <div class="social__media--wrap">
+          <div class="footer__logo">
+            <a href="/SSL-Project/index.php" id="footer__logo"><i class="fas fa-bus"></i>SSL BUS SERVICE</a>
+          </div>
+          <p class="website__rights">© SSL 2022. All rights reserved</p>
+          <div class="social__icons">
+            <a
+              class="social__icon--link"
+              href="https://www.facebook.com/iitdharwadofficial/"
+              target="_blank"
+              aria-label="Facebook"
+              title="IIT DH Facebook"
+            >
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.instagram.com/cdc.iitdh/?hl=en"
+              target="_blank"
+              aria-label="Instagram"
+              title="IIT DH Instagram"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.youtube.com/c/iitdharwadofficialchannel"
+              target="_blank"
+              aria-label="Youtube"
+              title="IIT DH Youtube"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://twitter.com/iitdhrwd?lang=en"
+              target="_blank"
+              aria-label="Twitter"
+              title="IIT DH Twitter"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.linkedin.com/company/iit-dharwad/"
+              target="_blank"
+              aria-label="LinkedIn"
+              title="IIT DH LinkedIn"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
     
 </body>
 </html>

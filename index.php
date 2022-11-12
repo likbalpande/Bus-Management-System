@@ -1,3 +1,10 @@
+<?php
+// echo $_SERVER["HTTP_REFERER"];
+// echo '<br>';
+// echo $_SERVER["HTTP_REFERER"];
+// echo '<br>';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,37 +45,57 @@
     }
     if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/signin/register.php")) {
       // echo'<div>**********From register***********</div>';
-      session_start();
-      include('./db.php');
-      // $passHash=password_hash(test_input($_POST["password"]), PASSWORD_DEFAULT);
-      $passHash=$_POST["password"];
-      $userName=test_input($_POST["username"]);
-      $firstName=test_input($_POST["firstName"]);
-      $sql="INSERT INTO users(userName, pass_word, firstName) VALUES('".$userName."', '".$passHash."', '".$firstName."');";
-      if(isset($_POST["email"]) && isset($_POST["lastName"])){
-        $sql="INSERT INTO users(userName, pass_word, firstName, lastName, email) VALUES('".$userName."', '".$passHash."', '".$firstName."', '".test_input($_POST["lastName"])."', '".test_input($_POST["email"])."'); ";
-      }
-      else if(isset($_POST["email"])){
-        $sql="INSERT INTO users(userName, pass_word, firstName, email) VALUES('".$userName."', '".$passHash."', '".$firstName."', '".test_input($_POST["email"])."'); ";
-      }
-      else if(isset($_POST["lastName"])){
-        $sql="INSERT INTO users(userName, pass_word, firstName, lastName) VALUES('".$userName."', '".$passHash."', '".$firstName."', '".test_input($_POST["lastName"])."'); ";
-      }
-      mysqli_query($conn,$sql);
-      $sql1="SELECT userId AS id FROM users WHERE userName ='".$userName."' AND pass_word = '".$passHash."' ;";
-      $user=mysqli_query($conn,$sql1);
-      $count=mysqli_num_rows($user);
-      if ($count>0) {
-          while($row=mysqli_fetch_assoc($user)){
-              $_SESSION["userId"] = $row['id'];
-          }
-          // echo('user id '.$_SESSION["userId"].'::');
-          $_SESSION["username"] = $userName;
-          $_SESSION["password"] = $passHash;
+      if(isset($_POST["password"])&&$_POST["username"]&&$_POST["firstName"]){
+        session_start();
+        include('./db.php');
+        // $passHash=password_hash(test_input($_POST["password"]), PASSWORD_DEFAULT);
+        $passHash=$_POST["password"];
+        $userName=test_input($_POST["username"]);
+        $firstName=test_input($_POST["firstName"]);
+        $sql="INSERT INTO users(userName, pass_word, firstName) VALUES('".$userName."', '".$passHash."', '".$firstName."');";
+        if(isset($_POST["email"]) && isset($_POST["lastName"])){
+          $sql="INSERT INTO users(userName, pass_word, firstName, lastName, email) VALUES('".$userName."', '".$passHash."', '".$firstName."', '".test_input($_POST["lastName"])."', '".test_input($_POST["email"])."'); ";
+        }
+        else if(isset($_POST["email"])){
+          $sql="INSERT INTO users(userName, pass_word, firstName, email) VALUES('".$userName."', '".$passHash."', '".$firstName."', '".test_input($_POST["email"])."'); ";
+        }
+        else if(isset($_POST["lastName"])){
+          $sql="INSERT INTO users(userName, pass_word, firstName, lastName) VALUES('".$userName."', '".$passHash."', '".$firstName."', '".test_input($_POST["lastName"])."'); ";
+        }
+        mysqli_query($conn,$sql);
+        $sql1="SELECT userId AS id FROM users WHERE userName ='".$userName."' AND pass_word = '".$passHash."' ;";
+        $user=mysqli_query($conn,$sql1);
+        $count=mysqli_num_rows($user);
+        if ($count>0) {
+            while($row=mysqli_fetch_assoc($user)){
+                $_SESSION["userId"] = $row['id'];
+            }
+            // echo('user id '.$_SESSION["userId"].'::');
+            $_SESSION["username"] = $userName;
+            $_SESSION["password"] = $passHash;
+        }
       }
     }
-    else{
-      // echo'<div>********Not from register*******</div>';
+  ?>
+
+  <?php 
+    //ADD COMPLAINT/QUERY
+    $add_complaint_or_query=false;
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/contactus/index.php")) {
+      $add_complaint_or_query=true;
+    }
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/contactus")) {
+      $add_complaint_or_query=true;
+    }
+    if($add_complaint_or_query){
+      if(isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["description"]))
+      {
+        include('./db.php');
+        $sql_add_complaint_or_query="INSERT INTO complaints(name,email,description) VALUES('$_POST[name]','$_POST[email]','$_POST[description]');";
+        // echo $sql_add_complaint_or_query;
+        mysqli_query($conn,$sql_add_complaint_or_query);
+        echo('<div style="width:100%; background:lime; color:green;">Your Complaint/Query is sent!</div>');
+      }
     }
   ?>
 
@@ -88,10 +115,6 @@
     <nav class="navbar">
         <div class="navbar__container">
             <a href="/SSL-Project" id="navbar__logo"><i class="fas fa-bus"></i>SSL Bus Services</a>
-            <div class="navbar__toggle" id="mobile-menu">
-            <span class="bar"></span> <span class="bar"></span>
-            <span class="bar"></span>
-            </div>
             <ul class="navbar__menu">
               <?php
                 if($auth){
@@ -125,19 +148,17 @@
                     <li class="navbar_item profileSection">
                       <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
                       <div class="profileContent">
-                          <div class="profileMenuContent">Edit Profile</div>
-                          <div class="profileMenuContent">Bookings</div>
+                          <div class="profileMenuContent"><a href="/SSL-Project/edit_profile/index.php">Edit&nbsp;Profile</a></div>
+                          <div class="profileMenuContent"><a href="/SSL-Project/history/index.php">Bookings</a></div>
                           <div class="profileMenuContent"><a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a></div>
-                          <div class="profileMenuContent">Help</div>
+                          <div class="profileMenuContent"><a href="/SSL-Project/contactus/index.php">Help</a></div>
                           <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
                       </div>
                     </li>
                   ');
                 }
               ?>
-            <!-- <li class="navbar__item">
-              <a href="/SSL-Project/admin/index.php" class="navbar__links">ADMIN&nbsp;PORTAL</a>
-            </li>   -->
+            
             </ul>
         </div>
     </nav>
@@ -147,7 +168,7 @@
       <div class="main__container">
         <div class="main__content">
           <h1>SSL BUS SERVICES</h1>
-          <br><br><br><br><br><br>
+          <br><br><br><br>
           <main>
             <form action="/SSL-Project/routes/index.php#availableRoutes" method="post" style="width:100%;">
                 <div class="searchSection">
@@ -196,12 +217,12 @@
         <div class="services__card">
           <h2>Already booked tickets?</h2>
           <p>See tickets here</p>
-          <button>BUS TICKETS</button>
+          <button> <a href="/SSL-Project/history/index.php">BUS TICKETS</a> </button>
         </div>
         <div class="services__card">
           <h2>Are you a freqeunt traveller?</h2>
           <p>Better purchase a bus pass</p>
-          <button>BUS PASS</button>
+          <button> <a href="/SSL-Project/bus_pass/index.php">BUS PASS</a> </button>
         </div>
       </div>
     </div>
@@ -213,26 +234,25 @@
           <div class="footer__link--items">
             <h2>About Us</h2>
             <a href="/SSL-Project/about_us/index.php">About&nbsp;Us</a>
-            <a href="/">Routes</a> 
-            <a href="/">Bus&nbsp;Pass</a>
-            <a href="/">Help</a> 
+            <a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a>
+            <a href="/SSL-Project/contactus/index.php">Help</a> 
           </div>
           <div class="footer__link--items">
             <h2>Contact Us</h2>
             <a href="/SSL-Project/contactus/index.php">Contact</a>
-            <a href="/">Support</a>
-            <a href="/SSL-project/faq/index.php">FAQs</a>
-            <a href="/">Become&nbsp;Partner</a>
+            <a href="/SSL-Project/contactus/index.php">Support</a>
+            <a href="/SSL-Project/contactus/index.php">FAQs</a>
           </div>
+          <div class="footer__link--items">
+             <h2>&nbsp;&nbsp;&nbsp;More</h2>
+             <a href="/SSL-Project/admin/index.php" class="navbar__links">Admin Portal</a>
+             <a href="/SSL-Project/edit_profile/index.php" class="navbar__links">Edit profile</a>
+             <a href="/SSL-Project/contactus/index.php" class="navbar__links">Enquiry</a>
+           </div> 
         </div>
         <div class="footer__link--wrapper">
 
-          <div class="footer__link--items">
-            <h2>More</h2>
-            <a href="/SSL-Project/admin/index.php">Admin&nbsp;Portal</a>
-            <a href="/">Enquiry</a>
-            <a href="/">Book&nbsp;ticket</a>
-          </div>
+         
         </div>
       </div>
       <section class="social__media">
@@ -247,6 +267,7 @@
               href="https://www.facebook.com/iitdharwadofficial/"
               target="_blank"
               aria-label="Facebook"
+              title="IIT DH Facebook"
             >
               <i class="fab fa-facebook"></i>
             </a>
@@ -255,6 +276,7 @@
               href="https://www.instagram.com/cdc.iitdh/?hl=en"
               target="_blank"
               aria-label="Instagram"
+              title="IIT DH Instagram"
             >
               <i class="fab fa-instagram"></i>
             </a>
@@ -263,6 +285,7 @@
               href="https://www.youtube.com/c/iitdharwadofficialchannel"
               target="_blank"
               aria-label="Youtube"
+              title="IIT DH Youtube"
             >
               <i class="fab fa-youtube"></i>
             </a>
@@ -271,6 +294,7 @@
               href="https://twitter.com/iitdhrwd?lang=en"
               target="_blank"
               aria-label="Twitter"
+              title="IIT DH Twitter"
             >
               <i class="fab fa-twitter"></i>
             </a>
@@ -279,6 +303,7 @@
               href="https://www.linkedin.com/company/iit-dharwad/"
               target="_blank"
               aria-label="LinkedIn"
+              title="IIT DH LinkedIn"
             >
               <i class="fab fa-linkedin"></i>
             </a>

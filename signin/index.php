@@ -127,15 +127,101 @@
                         echo('
                             <div class="moreOptions">
                                 <div style="text-align: center;">');
-                                    if($authorized){echo('<a href="#">Forgot Password ?</a><br><br>');}
-                                    echo('<a href="#">Contact Us</a>
+                                    if($authorized){echo('<a href="/SSL-Project/contactus/index.php">Forgot Password ?</a><br><br>');}
+                                    echo('<a href="/SSL-Project/contactus/index.php">Contact Us</a>
                                 </div>
                             </div>
                         ');
                 ?>
-            </div>
+
+    <br><br><br><br>
+    </div>
         </div>
     </div>
+
+    <div class="footer__container">
+      <div class="footer__links">
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>About Us</h2>
+            <a href="/SSL-Project/about_us/index.php">About&nbsp;Us</a>
+            <a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a>
+            <a href="/SSL-Project/
+            us/index.php">Help</a> 
+          </div>
+          <div class="footer__link--items">
+            <h2>Contact Us</h2>
+            <a href="/SSL-Project/contactus/index.php">Contact</a>
+            <a href="/">Support</a>
+            <a href="/SSL-Project/faq/index.php">FAQs</a>
+          </div>
+          <div class="footer__link--items">
+             <h2> <a href="/SSL-Project/admin/index.php" class="navbar__links">Admin Portal</a></h2>
+           </div> 
+        </div>
+        <div class="footer__link--wrapper">
+
+         
+        </div>
+      </div>
+      <section class="social__media">
+        <div class="social__media--wrap">
+          <div class="footer__logo">
+            <a href="/SSL-Project/index.php" id="footer__logo"><i class="fas fa-bus"></i>SSL BUS SERVICE</a>
+          </div>
+          <p class="website__rights">© SSL 2022. All rights reserved</p>
+          <div class="social__icons">
+            <a
+              class="social__icon--link"
+              href="https://www.facebook.com/iitdharwadofficial/"
+              target="_blank"
+              aria-label="Facebook"
+              title="IIT DH Facebook"
+            >
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.instagram.com/cdc.iitdh/?hl=en"
+              target="_blank"
+              aria-label="Instagram"
+              title="IIT DH Instagram"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.youtube.com/c/iitdharwadofficialchannel"
+              target="_blank"
+              aria-label="Youtube"
+              title="IIT DH Youtube"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://twitter.com/iitdhrwd?lang=en"
+              target="_blank"
+              aria-label="Twitter"
+              title="IIT DH Twitter"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              class="social__icon--link"
+              href="https://www.linkedin.com/company/iit-dharwad/"
+              target="_blank"
+              aria-label="LinkedIn"
+              title="IIT DH LinkedIn"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
     
 </body>
 </html>

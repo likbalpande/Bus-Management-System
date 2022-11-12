@@ -18,6 +18,27 @@
     z-index: 999;
   }
   
+  .main__btn {
+    font-size: 1rem;
+    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+    padding: 14px 32px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 2rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.35s;
+    outline: none;
+  }
+  
+  .main__btn a {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-decoration: none;
+  }
+  
   .navbar__container {
     display: flex;
     justify-content: space-between;
@@ -134,7 +155,7 @@ input{
     width:100vw;
     height:90vh;
     /* background: url("background5.jpg"); */
-    background-image: radial-gradient(#575353,#615b5b,#625f5f);
+    background-image: radial-gradient(#b03232d9,#9e1b1beb,#9b1617);
 }
 #signin-body{
     width:450px;
@@ -172,24 +193,23 @@ input{
     background-color: #4e0101;
 }
 
+/* .bcontainer{
+  background-color: rgb(123, 118, 118);
+  height:100%;
+ /* margin:auto; */
+  /* margin-bottom: auto; */
+.prof{
+  font-size: 25px;
+  color: white;
+  align-items: center;
+}
+
 .container{
     margin:10px auto;
     height:90%;
-    width: 94%;
-    /* background-image: linear-gradient(
-    to bottom,
-    #de8a1b 0%,
-    #de8a1b 0%,
-    #de8a1b 21%,
-    #de8a1b 52%,
-    #de8a1b 78%,
-    #de8a1b 100%
-  ); */
-  /* -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent; */
-  background-color: rgb(207, 160, 160);
+    width: 40%;
+
+  background-color: rgb(226, 170, 170);
   margin-bottom: 5rem;
 }
 
@@ -205,7 +225,7 @@ input{
     width:300px;
     text-align: left;
     padding-top: 20px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 /* form button{
@@ -241,6 +261,8 @@ input{
     /* display: none; */
     /* background-color: bisque; */
 }
+
+
 
 /* Footer CSS */
 .footer__container {
