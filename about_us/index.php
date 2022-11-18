@@ -42,7 +42,7 @@
                       if($auth){
                       echo('
                           <li class="navbar__item">
-                              <a href="/SSL-Project/routes" class="navbar__links">Booking&nbsp;History</a>
+                              <a href="/SSL-Project/history/index.php" class="navbar__links">Booking&nbsp;History</a>
                           </li>
                           <li class="navbar__item">
                               <a href="/SSL-Project" class="navbar__links">Home</a>
@@ -58,7 +58,7 @@
                           <a href="/SSL-Project/signin/index.php" class="navbar__links">Log&nbsp;In</a>
                           </li>
                           <li class="navbar__item">
-                              <a href="/SSL-Project" class="navbar__links">Home</a>
+                              <a href="/SSL-Project/index.php" class="navbar__links">Home</a>
                           </li>
                           <li class="navbar__item">
                             <a href="/SSL-Project/routes/index.php" class="navbar__links">Search&nbsp;Route</a>

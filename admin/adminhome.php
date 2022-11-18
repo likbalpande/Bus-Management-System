@@ -1,3 +1,15 @@
+<?php
+    $auth=false;
+    session_start();
+    if(isset($_SESSION['username'])){
+        // echo('User SignedIn<br>');
+        $auth = true;
+    }
+    else{
+        // echo('User NOT SignedIn');
+        header("location: /SSL-Project/index.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -79,7 +91,7 @@ li a:hover {
 <div class="topnav">
   <a class="active" href="#home">Admin Home</h1></a>
   <div class="topnav-right">
-    <a href="/SSL-project/index.php">LOG OUT</a>
+    <a href="/SSL-Project/signin/index.php">LOG OUT</a>
   </div>
 </div>
 <div class="header flex-center">

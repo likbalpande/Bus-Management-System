@@ -156,11 +156,14 @@
           <div class="footer__link--items">
             <h2>Contact Us</h2>
             <a href="/SSL-Project/contactus/index.php">Contact</a>
-            <a href="/">Support</a>
-            <a href="/SSL-Project/faq/index.php">FAQs</a>
+            <a href="/SSL-Project/contactus/index.php">Support</a>
+            <a href="/SSL-Project/contactus/index.php">FAQs</a>
           </div>
           <div class="footer__link--items">
-             <h2> <a href="/SSL-Project/admin/index.php" class="navbar__links">Admin Portal</a></h2>
+             <h2>&nbsp;&nbsp;&nbsp;More</h2>
+             <a href="/SSL-Project/admin/index.php" class="navbar__links">Admin Portal</a>
+             <a href="/SSL-Project/edit_profile/index.php" class="navbar__links">Edit profile</a>
+             <a href="/SSL-Project/contactus/index.php" class="navbar__links">Enquiry</a>
            </div> 
         </div>
         <div class="footer__link--wrapper">

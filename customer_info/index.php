@@ -2,11 +2,11 @@
     $auth=false;
     session_start();
     if(isset($_SESSION['userId'])){
-        echo('User SignedIn<br>');
+        // echo('User SignedIn<br>');
         $auth = true;
     }
     else{
-        echo('User NOT SignedIn');
+        // echo('User NOT SignedIn');
         header('location: /SSL-Project/index.php');
     }
 
@@ -36,6 +36,8 @@
     // echo $sql_insert_seat_occupancy;echo '<br>';
     mysqli_query($conn,$sql_insert_seat_occupancy);
   }
+  $sql_number_of_bookings="UPDATE `routes` SET `numberOfBookings` = numberOfBookings + $number_of_seats WHERE (`routeId` = '$_POST[routeId]');";
+  mysqli_query($conn,$sql_number_of_bookings);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +78,7 @@
                       if($auth){
                       echo('
                           <li class="navbar__item">
-                              <a href="/SSL-Project/routes" class="navbar__links">Booking&nbsp;History</a>
+                              <a href="/SSL-Project/history/index.php" class="navbar__links">Booking&nbsp;History</a>
                           </li>
                           <li class="navbar__item">
                               <a href="/SSL-Project" class="navbar__links">Home</a>
@@ -136,7 +138,7 @@ function test_input($data) {
 }
 ?>
 
-<h1>Passenger Information</h1>
+<h1 style="padding:10px;">Passenger Information</h1>
 
 <?php
 $i=0;
@@ -163,7 +165,7 @@ while ($i<$number_of_seats){
     <br>
     <input type="radio" name="gender'.($i+1).'" value="Other" required > Other
     <br><br>
-    Phone Number <input type="mobile" name="phoneno'.($i+1).'">
+    Phone Number <input type="mobile" pattern="[0-9]{10}" name="phoneno'.($i+1).'">
     <br><br>
  </div>';
  $i=$i+1;

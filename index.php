@@ -187,10 +187,12 @@
                             </button>
                             <?php 
                                     echo('
-                                        <input id="input-to" class="main__btn" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
+                                        <div style="display:inline-block;">
+                                          <input id="input-to" class="main__btn" type="text" size="16" placeholder=" TO" onkeyup="javascript:searchPlaces(\'to\',this.value)" name="toCity" required>
+                                          <span id="to-suggestions"></span>
+                                        </div>
                                     ');
                             ?>
-                            <span id="to-suggestions"></span>
 
                             <?php
                                     echo('

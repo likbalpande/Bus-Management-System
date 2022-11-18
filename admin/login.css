@@ -11,7 +11,12 @@ input{
     outline: none;
 }
 
-
+.go-back{
+    /* float:right; */
+    background-color: #4e0101;
+    cursor: pointer;
+    /* font-size: 15px; */
+}
 
 .flex-center{
     display: flex;

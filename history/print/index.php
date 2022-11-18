@@ -2,11 +2,26 @@
     $auth=false;
     session_start();
     if(isset($_SESSION['userId'])){
-        echo('User SignedIn<br>');
+        // echo('User SignedIn<br>');
         $auth = true;
     }
     else{
-        echo('User NOT SignedIn');
+        // echo('User NOT SignedIn');
+        header('location: /SSL-Project/index.php');
+    }
+?>
+<?php
+    $validPath = false;
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/history/index.php")) {
+        $validPath = true;
+        // echo'<div>**********From SSLP***********</div>';
+    }
+    if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/history")) {
+    $validPath = true;
+    // echo'<div>**********From SSLP***********</div>';
+    }
+    if(! $validPath){
+    header('location: /SSL-Project/history/index.php');
     }
 ?>
   <!DOCTYPE html>
@@ -36,7 +51,7 @@
                     if($auth){
                     echo('
                         <li class="navbar__item">
-                            <a href="/SSL-Project/routes" class="navbar__links">Booking&nbsp;History</a>
+                            <a href="/SSL-Project/history/index.php" class="navbar__links">Booking&nbsp;History</a>
                         </li>
                         <li class="navbar__item">
                             <a href="/SSL-Project" class="navbar__links">Home</a>
@@ -56,21 +71,21 @@
                     // <!-- <li class="navbar__btn"><a href="/" class="button">BUS TICKETS</a></li> -->
                     echo('
                     <li class="navbar__item">
-                        <a href="/SSL-Project" class="navbar__links">About&nbsp;Us</a>
+                        <a href="/SSL-Project/about_us/index.php" class="navbar__links">About&nbsp;Us</a>
                     </li>
                     ');
                     if($auth){
                     echo('
-                        <li class="navbar_item profileSection">
-                        <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
-                        <div class="profileContent">
-                            <div class="profileMenuContent">Edit Profile</div>
-                            <div class="profileMenuContent">Bookings</div>
-                            <div class="profileMenuContent">Bus&nbsp;Pass</div>
-                            <div class="profileMenuContent">Help</div>
-                            <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
-                        </div>
-                    </li>
+                    <li class="navbar_item profileSection">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
+                    <div class="profileContent">
+                        <div class="profileMenuContent"><a href="/SSL-project/edit_profile/index.php">Edit&nbsp;Profile</a></div>
+                        <div class="profileMenuContent"><a href="/SSL-Project/history/index.php">Bookings</a></div>
+                        <div class="profileMenuContent"><a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a></div>
+                        <div class="profileMenuContent"><a href="/SSL-Project/contactus/index.php">Help</a></div>
+                        <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>
+                    </div>
+                </li>
                     ');
                     }
                 ?>
@@ -134,7 +149,7 @@
                             // else{
                             //     echo('<div class="ticket_card bg-active">2');
                             // }
-                            echo('
+                            echo('<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SSL Bus Services</h1><br>
                                 <div class="ticket_card">
                                     <div class="routeFrom">
                                         <div class="routeCityLabel">From:</div>
@@ -158,20 +173,34 @@
                                     </div>-->
                                 </div>
                             ');
+                            $sql_bus="SELECT numberPlate FROM buses where busId = ".$route["busId"]." ;";
+                            $route_bus=mysqli_query($conn,$sql_bus);
+                            $row_bus=mysqli_fetch_assoc($route_bus);
+                            echo'<div style="width:85%;text-align:center;background:rgb(152, 141, 141);margin:0px auto;border-left:2px solid rgb(212, 205, 205);border-right:2px solid rgb(212, 205, 205);"><b>Bus Number: '.$row_bus["numberPlate"].'</b></div>';
                             echo '<div class="customer_container">';
                             for($i=1;$i<=$row["numberOfSeats"];$i++){
                                 $sql_customer="SELECT * FROM customers where customerId = '".$row["bookingId"]."_".$i."' ;";
                                 $customer_data=mysqli_query($conn,$sql_customer);
-                                $customer_row=mysqli_fetch_assoc($customer_data);
-                                echo ('
-                                    <div class="customer_info">
-                                        <p>Name: '.$customer_row["name"].'</p>
-                                        <p>Age: '.$customer_row["age"].'</p>
-                                        <p>Gender: '.$customer_row["gender"].'</p>
-                                        <p>Phone Number: '.$customer_row["phoneNumber"].'</p>
-                                        <p>Seat No: '.$customer_row["seatAlloted"].'</p>    
-                                    </div>
-                                ');
+                                $count_cus=mysqli_num_rows($customer_data);
+                                if($count_cus>0){
+                                    $customer_row=mysqli_fetch_assoc($customer_data);
+                                    echo ('
+                                        <div class="customer_info">
+                                            <p>Name: '.$customer_row["name"].'</p>
+                                            <p>Age: '.$customer_row["age"].'</p>
+                                            <p>Gender: '.$customer_row["gender"].'</p>
+                                            <p>Phone Number: '.$customer_row["phoneNumber"].'</p>
+                                            <p>Seat No: '.$customer_row["seatAlloted"].'</p>    
+                                        </div>
+                                    ');
+                                }
+                                else{
+                                    echo ('
+                                        <div class="customer_info">
+                                            <p>Customer data not available!</p> 
+                                        </div>
+                                    ');
+                                }
                             }
                             echo('</div>');
                         }

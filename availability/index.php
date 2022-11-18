@@ -2,11 +2,11 @@
     $auth=false;
     session_start();
     if(isset($_SESSION['userId'])){
-        echo('User SignedIn<br>');
+        // echo('User SignedIn<br>');
         $auth = true;
     }
     else{
-        echo('User NOT SignedIn');
+        // echo('User NOT SignedIn');
         header('location: /SSL-Project/index.php');
     }
 

@@ -31,7 +31,7 @@
     if (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], "/SSL-Project/customer_info")) {
         $uploadData=true;
     }
-    if($uploadData){
+    if($uploadData && isset($_POST["bookingId"])){
         include('../db.php');
         $bookingId=$_POST["bookingId"];
         for ($i=1; $i<=count($_POST["seat"]);$i++)
@@ -81,7 +81,7 @@
                     // <!-- <li class="navbar__btn"><a href="/" class="button">BUS TICKETS</a></li> -->
                     echo('
                     <li class="navbar__item">
-                        <a href="/SSL-Project" class="navbar__links">About&nbsp;Us</a>
+                        <a href="/SSL-Project/about_us/index.php" class="navbar__links">About&nbsp;Us</a>
                     </li>
                     ');
                     if($auth){
@@ -90,7 +90,6 @@
                         <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="Avatar" class="avatar">
                         <div class="profileContent">
                             <div class="profileMenuContent"><a href="/SSL-project/edit_profile/index.php">Edit&nbsp;Profile</a></div>
-                            <div class="profileMenuContent"><a href="/SSL-Project/history/index.php">Bookings</a></div>
                             <div class="profileMenuContent"><a href="/SSL-Project/bus_pass/index.php">Bus&nbsp;Pass</a></div>
                             <div class="profileMenuContent"><a href="/SSL-Project/contactus/index.php">Help</a></div>
                             <div class="profileMenuContent"><a href="/SSL-Project/signin/index.php">Logout</a></div>

@@ -174,18 +174,18 @@ button:active{
     transition: 0.3s;
     width:90%;
     margin:40px auto;
-    background-color: #ade74f57;
+    background-color: #d66666;
     padding:40px 0px;
 }
 .ticket_card{
-    border:2px solid rgba(240, 128, 128, 0.345);
+    border:2px solid rgb(212, 205, 205);
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     margin:0px auto;
     padding:20px;
     width:85%;
-    background-color:rgba(255, 166, 0, 0.466);
+    background-color:rgb(152, 141, 141);
     border-bottom: none;
     margin-bottom: none;
 }
@@ -230,8 +230,8 @@ button:active{
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    background-color:rgba(255, 166, 0, 0.466);
-    border:2px solid rgba(240, 128, 128, 0.345);
+    background-color:rgb(152, 141, 141);
+    border:2px solid rgb(212, 205, 205);
     border-top:none;
     padding-bottom:30px;
 }
@@ -256,7 +256,7 @@ button:active{
     color: #fff;
 }
 .printBtn:hover{
-    background-color: rgba(5, 97, 255, 0.95);
+    background-color: rgba(16, 57, 127, 0.95);
     scale: 1.01;
     transition: 0.1s;
 }

@@ -85,7 +85,7 @@
             // <!-- <li class="navbar__btn"><a href="/" class="button">BUS TICKETS</a></li> -->
             echo('
               <li class="navbar__item">
-                <a href="/SSL-Project" class="navbar__links">About&nbsp;Us</a>
+                <a href="/SSL-Project/about_us/index.php" class="navbar__links">About&nbsp;Us</a>
               </li>
             ');
             if($auth){
@@ -123,28 +123,28 @@
               $count=mysqli_num_rows($res);
               if($count>0){
                 $row=mysqli_fetch_assoc($res);
-                echo('<h3 style="margin-top:10px">Your Bus Pass is Valid Till: </h3>');
-                echo('<p style="color:rgb(98, 58, 6); font-size:17px;margin:10px 0 0 103px;"> YYYY-MM-DD HH-MM-SS </p> ');
-                echo('<b><p style="color:green; font-size:22px;margin:5px 0 20px 100px;"> '.$row["validTill"].' </p></b> ');
+                echo('<h2 style="margin-top:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Bus Pass is Valid Till: </h2>');
+                echo('<p style="color:#aaa; font-size:17px;margin:10px 0 0 103px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YYYY-MM-DD HH-MM-SS </p> ');
+                echo('<b><p style="color:rgb(122,32,32); font-size:22px;margin:5px 0 20px 100px;">&nbsp;&nbsp;&nbsp; '.$row["validTill"].' </p></b> ');
               }
               else{
-                echo('<h4 style="margin-top:10px">It seems your Bus Pass has EXPIRED!</h4>');
+                echo('<h3 style="margin-top:10px">It seems your Bus Pass has EXPIRED!</h3>');
                 $form=true;
               }
             }
             else{
-              echo('<h4 style="margin-top:10px">It seems you don\'t have any Bus Pass!</h4>');
+              echo('<h3 style="margin-top:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It seems you don\'t have any BUS PASS!</h3>');
               $form=true;
             }
           ?>
           <?php 
           if($form==true){
             echo('
-              <h3 style="margin-top:10px">Want to buy a Bus Pass?</h3>
-              <h4 style="margin-top:10px">Select number of days:</h4>
+              <h3 style="margin-top:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Want to buy a BUS PASS?</h3>
+              <h4 style="margin-top:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select number BUS PASS according to number of days</h4>
               <div class="form">
                 <h4>24 hours<h4>
-                <h5>INR 2,499<h4>
+                <h4>INR 2,499<h4>
                 <form action="#" method="post">
                   <input type="hidden" name="days" value="1">
                   <button class="buyPassBtn">Buy&nbsp;Now</button>
@@ -152,7 +152,7 @@
               </div>
               <div class="form">
                 <h4>3 days<h4>
-                <h5>INR 5,499<h4>
+                <h4>INR 5,499<h4>
                 <form action="#" method="post">
                   <input type="hidden" name="days" value="3">
                   <button class="buyPassBtn">Buy&nbsp;Now</button>
@@ -160,7 +160,7 @@
               </div>
               <div class="form">
                 <h4>7 days<h4>
-                <h5>INR 10,999<h4>
+                <h4>INR 10,999<h4>
                 <form action="#" method="post">
                   <input type="hidden" name="days" value="7">
                   <button class="buyPassBtn">Buy&nbsp;Now</button>
@@ -171,11 +171,11 @@
           else{
             echo('
             <div style="text-align:center;">
-              <h4 style="margin-top:10px">Use the Bus Pass to book your Tickets</h4>
-              <h3 style="margin-top:10px">Happy Journey!</h3>
+              <h4 style="margin-top:10px">&nbsp;&nbsp;&nbsp;&nbsp;Use the Bus Pass to book your Tickets</h4>
+              <h1 style="margin-top:10px;color:white;">Happy Journey!</h1>
               <a href="/SSL-Project/index.php" ><button class="homeBtn">Home</button></a>
               <p style="margin-top:30px">Have any query?</p>
-              <p style="margin-left:15px"><a href="#">Contact Us</a></p>
+              <p style="margin-left:15px"><a href="/SSL-Project/contactus/index.php">Contact Us</a></p>
             </div>
             
             ');

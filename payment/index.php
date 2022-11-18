@@ -2,11 +2,11 @@
     $auth=false;
     session_start();
     if(isset($_SESSION['userId'])){
-        echo('User SignedIn<br>');
+        // echo('User SignedIn<br>');
         $auth = true;
     }
     else{
-        echo('User NOT SignedIn');
+        // echo('User NOT SignedIn');
         header('location: /SSL-Project/index.php');
     }
 
@@ -53,7 +53,7 @@
         if ($auth) {
           echo ('
             <li class="navbar__item">
-              <a href="/SSL-Project/routes" class="navbar__links">Booking&nbsp;History</a>
+              <a href="/SSL-Project/history/index.php" class="navbar__links">Booking&nbsp;History</a>
             </li>
             <li class="navbar__item">
                 <a href="/SSL-Project" class="navbar__links">Home</a>
@@ -99,7 +99,7 @@
   <h1>&nbsp&nbsp Payment Options</h1>
   <?php
     $number_of_seats = count($_POST["seat"]);
-    $route_id = 1;
+    $route_id = $_POST["routeId"];
     $valid_bus_pass=false;
     include('../db.php');
     $fare = $conn->query("SELECT fare FROM routes WHERE routeId=$route_id");
@@ -114,7 +114,7 @@
         $valid_bus_pass=true;
       }
     }
-  ?>
+    ?>
   <div class="form">
     <h3>Total Amount : INR <?php echo $row["fare"] * $number_of_seats; ?> </h3>
     <br><br>
@@ -127,9 +127,16 @@
       <br><br>
       <?php 
         if($valid_bus_pass){
-          echo('
-            <input type="radio" name="payment_type" value="5" id="pass" required><label for="pass"> Bus Pass  </label>
-          ');
+          if($number_of_seats==1){
+            echo('
+              <input type="radio" name="payment_type" value="5" id="pass" required><label for="pass"> Bus Pass  </label>
+            ');
+          }
+          else{
+            echo('
+              <input type="radio" name="payment_type" value="5" id="pass" disabled><label for="pass" style="color:grey"> Bus Pass (Can be used for 1 seat booking only)</label>
+            ');
+          }
         }
         else{
           echo('

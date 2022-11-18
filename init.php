@@ -59,7 +59,7 @@
     $sql7="CREATE TABLE IF NOT EXISTS buses(
         busId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         numberPlate VARCHAR(50) NOT NULL UNIQUE,
-        capacity INT default(30) 
+        capacity INT default(10) 
     );";
     $conn->query($sql7);
     //Insert values in buses table

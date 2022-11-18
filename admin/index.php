@@ -1,4 +1,10 @@
 <!-- Please execute db.php once before to create db and table -->
+<?php
+    // if (session_status() === PHP_SESSION_ACTIVE)
+    session_start();
+    session_destroy();
+    // echo session_status();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +29,9 @@
     <h1> Admin Portal </h1>
 </div> -->
 <!-- </nav> -->
+<div class = "go-back">
+    <a href="../index.php"> Home page <a>
+</div>
 <div class="univ flex-center">
     <div id="signin-body">
         

@@ -1,5 +1,17 @@
 <?php
-session_start();
+// session_start();
+?>
+<?php
+    $auth=false;
+    session_start();
+    if(isset($_SESSION['username'])){
+        // echo('User SignedIn<br>');
+        $auth = true;
+    }
+    else{
+        // echo('User NOT SignedIn');
+        header("location: /SSL-Project/index.php");
+    }
 ?>
 <html>
 <head>

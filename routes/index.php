@@ -36,7 +36,7 @@
                     if($auth){
                     echo('
                         <li class="navbar__item">
-                            <a href="/SSL-Project/routes" class="navbar__links">Booking&nbsp;History</a>
+                            <a href="/SSL-Project/history/index.php" class="navbar__links">Booking&nbsp;History</a>
                         </li>
                         <li class="navbar__item">
                             <a href="/SSL-Project" class="navbar__links">Home</a>
@@ -107,7 +107,7 @@
                         </div>
                         <div>
                         <br><br>
-                            <button class="main__btndate" onclick="javascript:swapToAndFrom(event)">
+                            <button class="main__btn" onclick="javascript:swapToAndFrom(event)">
                                   Swap
                             </button>
                         </div>
@@ -132,12 +132,12 @@
                             <?php
                                 if(array_key_exists('date', $_POST)) {
                                     echo('
-                                        <input id="date" class="main__btn" type="date" value="'.$_POST["date"].'" class="search-date" name="date" required>
+                                        <input id="date" class="main__btndate" type="date" value="'.$_POST["date"].'" class="search-date" name="date" required>
                                     ');
                                 }
                                 else{
                                     echo('
-                                        <input id="date" class="main__btndate" type="date" class="search-date" name="date" required>
+                                        <input id="date" class="main__btndate" type="date"  name="date" required>
                                     ');
                                 }
                             ?>
@@ -329,14 +329,18 @@
           <div class="footer__link--items">
             <h2>Contact Us</h2>
             <a href="/SSL-Project/contactus/index.php">Contact</a>
-            <a href="/">Support</a>
-            <a href="/SSL-Project/faq/index.php">FAQs</a>
+            <a href="/SSL-Project/contactus/index.php">Support</a>
+            <a href="/SSL-Project/contactus/index.php">FAQs</a>
           </div>
           <div class="footer__link--items">
-             <h2> <a href="/SSL-Project/admin/index.php" class="navbar__links">Admin Portal</a></h2>
+             <h2>&nbsp;&nbsp;&nbsp;More</h2>
+             <a href="/SSL-Project/admin/index.php" class="navbar__links">Admin Portal</a>
+             <a href="/SSL-Project/edit_profile/index.php" class="navbar__links">Edit profile</a>
+             <a href="/SSL-Project/contactus/index.php" class="navbar__links">Enquiry</a>
            </div> 
         </div>
         <div class="footer__link--wrapper">
+
 
          
         </div>
